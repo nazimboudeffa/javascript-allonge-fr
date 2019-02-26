@@ -1,13 +1,13 @@
-## JavaScript Allongé, the "Six" Edition
+## JavaScript Allongé, la "Six" Edition
 
-This is the original version of JavaScript Allongé. It was written for ECMAScript-5. The overarching theme of the book and approach to programming is as valid today as it was when ECMAScript-5 was the standard for JavaScript, however the details of how best to implement these ideas have changed.
+Ceci est la version originale de JavaScript Allongé. Il a été écrit pour ECMAScript-5. Le thème général du livre et son approche de la programmation sont aussi valables qu’aujourd’hui quand ECMAScript-5 était la norme pour JavaScript, mais les détails de la meilleure façon de mettre en œuvre ces idées ont changé.
 
-For example, in ECMAScript-5, we write:
+Par example, en ECMAScript-5, on écrit :
 
     function maybe (fn) {
       return function () {
         var i;
-        
+
         if (arguments.length === 0) {
           return
         }
@@ -19,8 +19,8 @@ For example, in ECMAScript-5, we write:
         }
       }
     }
-    
-But in ECMAScript-2015, we write:
+
+Mais en ECMAScript-2015, on écrit :
 
     const maybe = (fn) =>
       function (...args) {
@@ -35,8 +35,8 @@ But in ECMAScript-2015, we write:
         }
       }
 
-Other changes include the introduction of the `class` keyword, which leads to a greater interest in working with objects, prototypes, and functions.
+Parmi les autres modifications, citons l'introduction du mot-clé `class`, qui suscite un intérêt accru pour l'utilisation d'objets, de prototypes et de fonctions.
 
-For this reason, this original manuscript has been retired, and a substantially updated edition, [JavaScript Allongé, the "Six" Edition][j6] has been written. Please enjoy this copy, but be sure to read the latest edition.
+Pour cette raison, ce manuscrit original a été retiré et une édition sensiblement mise à jour, [JavaScript Allongé, l'édition "Six"] [j6] a été écrite. S'il vous plaît profiter de cette copie, mais assurez-vous de lire la dernière édition.
 
 [j6]: https://leanpub.com/javascriptallongesix
