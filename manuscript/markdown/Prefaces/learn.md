@@ -1,15 +1,15 @@
-## What Will You Learn?
+## Qu'allez Vous Apprendre ?
 
-Like *The Little Schemer*, *JavaScript Allongé* is valuable to the new programmer as well as the experienced developer. *JavaScript Allongé* will provide a deep grounding in the fundamentals such functions, values, references, closures, and functions that consume and return functions. It then progresses to advanced topics built on those fundamentals such as callbacks, combinators, method decorators, fluent APIs, and continuation-passing style.
+Comme *The Little Schemer*, *JavaScript Allongé* est précieux pour le nouveau programmeur ainsi que pour le développeur expérimenté. *JavaScript Allongé* fournira une connaissance approfondie des principes fondamentaux tels que les fonctions, les valeurs, les références, les fermetures et les fonctions qui consomment et renvoient des fonctions. Il passe ensuite à des sujets avancés basés sur ces principes de base tels que les rappels, les combinateurs, les décorateurs de méthodes, les API fluides et le style de poursuite.
 
-### why you should read this book
+### pourquoi vous devriez lire ce livre
 
-The techniques presented in *JavaScript Allongé* will make you a better JavaScript programmer *now*. You'll learn how to write cleaner code that takes advantage of JavaScript's excellent support for making functional programs that are easy for humans to read. You'll also learn the fundamentals that will make you a better programmer when working with other languages such as JavaScript, Python, or Clojure.
+Les techniques présentées dans *JavaScript Allongé* feront de vous un meilleur programmeur JavaScript *maintenant*. Vous apprendrez à écrire un code plus propre qui tire parti de l'excellent support de JavaScript pour créer des programmes fonctionnels faciles à lire. Vous apprendrez également les bases qui feront de vous un meilleur programmeur lorsque vous travaillerez avec d'autres langages tels que JavaScript, Python ou Clojure.
 
-### suggested prerequisites
+### prérequis suggérés
 
-No previous knowledge of JavaScript is assumed, although some knowledge of common programming concepts such as values, functions, references, strings, maps, and arrays will be immensely helpful.
+Aucune connaissance préalable de JavaScript n’est supposée, bien que certaines connaissances des concepts de programmation courants tels que les valeurs, les fonctions, les références, les chaînes, les maps et les tableaux soient extrêmement utiles.
 
-Please email your candid feedback to [reg@braythwayt.com](mailto:reg@braythwayt.com). Thank you!
+S'il vous plait envoyez votre sincère feedback email à [reg@braythwayt.com](mailto:reg@braythwayt.com). Merci !
 
 --Reginald "Raganwald" Braithwaite, Toronto, 2012
