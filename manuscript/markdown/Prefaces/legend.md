@@ -1,20 +1,20 @@
 ## Legend
 
-Some text in monospaced type like `this` in the text represents some code being discussed. Some monospaced code in its own lines also represents code being discussed:
+Un texte de type monospaced tel que `this` dans le texte représente du code en cours de discussion. Certains codes monospaces dans ses propres lignes représentent également le code en cours de discussion :
 
     this.async = do (async = undefined) ->
 
       async = (fn) ->
         (argv..., callback) ->
           callback(fn.apply(this, argv))
-          
-Sometimes it will contain some code for you to type in for yourself. When it does, the result of typing something in will often be shown using `//=>`, like this:
+
+Parfois, il contiendra du code que vous pourrez saisir vous-même. Lorsque cela se produit, le résultat de la saisie de quelque chose sera souvent affiché avec `// =>`, comme ceci :
 
     2 + 2
       //=> 4
 
-T> A paragraph marked like this is a "key fact." It summarizes an idea without adding anything new.
+T> Un paragraphe marqué comme ceci est un "fait essentiel". Cela résume une idée sans rien ajouter de nouveau.
 
-X> A paragraph marked like this is a suggested exercise to be performed on your own.
+X> Un paragraphe marqué comme ceci est un exercice suggéré que vous devez effectuer vous-même.
 
-A> A paragraph marked like this is an aside. It can be safely ignored. It contains whimsey and other doupleplusunserious logorrhea that will *not* be on the test.
+A> Un paragraphe marqué comme ceci est un aparté. Il peut être ignoré en toute sécurité. Il contient whimsey et autres logorrhées doupleplusunserious qui ne seront *pas* testées.
