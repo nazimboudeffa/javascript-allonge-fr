@@ -1,4 +1,4 @@
-## Legend
+## Légende
 
 Un texte de type monospaced tel que `this` dans le texte représente du code en cours de discussion. Certains codes monospaces dans ses propres lignes représentent également le code en cours de discussion :
 
