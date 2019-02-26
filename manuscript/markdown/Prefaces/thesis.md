@@ -1,3 +1,3 @@
-## JavaScript Allongé's Thesis
+## La Thèse de JavaScript Allongé
 
-JavaScript is a *functional* programming language, and the best way to learn to program in JavaScript is to learn how they work, in depth, from the simplest principles up to advanced ideas.
+JavaScript est un langage de programmation *fonctionnel*, et le meilleur moyen d'apprendre à programmer en JavaScript est d'apprendre comment ils fonctionnent, en profondeur, des principes les plus simples aux idées les plus avancées.
