@@ -1,116 +1,116 @@
-# Prelude: Values and Expressions
+# Prélude: Valeurs et Expressions
 
-*The following material is extremely basic, however like most stories, the best way to begin is to start at the very beginning.*
+*Le matériel suivant est extrêmement basique, mais comme dans la plupart des histoires, la meilleure façon de commencer est de commencer au tout début.*
 
-Imagine we are visiting our favourite coffee shop. They will make for you just about any drink you desire, from a short, intense espresso ristretto through a dry cappuccino, up to those coffee-flavoured desert concoctions featuring various concentrated syrups and milks. (You tolerate the existence of sugary drinks because they provide a sufficient profit margin to the establishment to finance your hanging out there all day using their WiFi and ordering a $3 drink every few hours.)
+Imaginez que nous visitons notre café préféré. Ils vous feront à peu près n'importe quelle boisson de votre choix, d'un expresso ristretto intense à un cappuccino sec, en passant par des préparations à base de café au goût de café contenant divers sirops et laits concentrés. (Vous tolérez l’existence de boissons sucrées car elles offrent une marge bénéficiaire suffisante à l’établissement pour que vous puissiez rester toute la journée avec votre partenaire via WiFi et en commandant une boisson à 3 $ toutes les quelques heures.)
 
-You express your order at one end of their counter, the folks behind the counter perform their magic, and deliver the coffee you value at the other end. This is exactly how the JavaScript environment works for the purpose of this book. We are going to dispense with web servers, browsers and other complexities and deal with this simple model: You give the computer an [expression], and it returns a [value], just as you express your wishes to a barista and receive a coffee in return.
+Vous exprimez votre commande à un bout de leur comptoir, les gens derrière le comptoir réalisent leur magie et livrent le café que vous appréciez à l'autre bout. C’est exactement comme cela que fonctionne l’environnement JavaScript aux fins de ce livre. Nous allons nous passer de serveurs Web, navigateurs et autres complexités et traiter ce modèle simple: vous donnez une [expression] à l'ordinateur, elle renvoie une [valeur], exactement comme vous exprimez vos souhaits à un bariste et recevez un café. en retour.
 
-[expression]: https://en.wikipedia.org/wiki/Expression_(computer_science)
-[value]: https://en.wikipedia.org/wiki/Value_(computer_science)
+[expression]: https://fr.wikipedia.org/wiki/Expression_(informatique)
+[valeur]: https://fr.wikipedia.org/wiki/Valeur_(informatique)
 
-## values and expressions
+## valeurs and expressions
 
-All values are expressions. Say you hand the barista a café Cubano. Yup, you hand over a cup with some coffee infused through partially caramelized sugar. You say, "I want one of these." The barista is no fool, she gives it straight back to you, and you get exactly what you want. Thus, a café Cubano is an expression (you can use it to place an order) and a value (you get it back from the barista).
+Toutes les valeurs sont des expressions. Dites que vous donnez au bariste un café Cubano. Eh oui, vous remettez une tasse de café infusé dans du sucre partiellement caramélisé. Vous dites : "Je veux un de ceux-ci." Le bariste n’est pas idiot, il vous le rend tout de suite et vous obtenez exactement ce que vous voulez. Ainsi, un café cubano est une expression (vous pouvez l'utiliser pour passer une commande) et une valeur (vous la récupérez du bariste).
 
-Let's try this with something the computer understands easily:
+Essayons ceci avec quelque chose que peut facilement comprendre l'ordinateur :
 
     42
 
-Is this an expression? A value? Neither? Or both?
+Est-ce que ceci est une expression? Une valeur? Aucune des deux? Ou les deux?
 
-The answer is, this is both an expression *and* a value.[^representation] The way you can tell that it's both is very easy: When you type it into JavaScript, you get the same thing back, just like our café Cubano:
+La réponse est que c’est à la fois une expression *et* une valeur. [^représentation] Il est très facile de dire que c’est très simple : lorsque vous le saisissez en JavaScript, vous obtenez la même chose, tout comme notre café Cubano. :
 
     42
       //=> 42
 
-[^representation]: Technically, it's a *representation* of a value using Base10 notation, but we needn't worry about that in this book. You and I both understand that this means "42," and so does the computer.
+[^représentation]: Techniquement, c'est une *représentation* d'une valeur utilisant la notation Base10, mais nous n'avons pas à nous en préoccuper dans ce livre. Vous et moi comprenons tous les deux que cela signifie "42", de même que l'ordinateur.
 
-All values are expressions. That's easy! Are there any other kinds of expressions? Sure! let's go back to the coffee shop. Instead of handing over the finished coffee, we can hand over the ingredients. Let's hand over some ground coffee plus some boiling water.
+Toutes les valeurs sont des expressions. C'est facile! Existe-t-il d'autres types d'expressions ? Sûr ! Retournons au café. Au lieu de remettre le café fini, nous pouvons remettre les ingrédients. Remettons un peu de café moulu et de l’eau bouillante.
 
-A> Astute readers will realize we're omitting something. Congratulations! Take a sip of espresso. We'll get to that in a moment.
+A> Les lecteurs astucieux se rendront compte que nous omettons quelque chose. Toutes nos félicitations ! Prenez une gorgée d'espresso. Nous y reviendrons dans un instant.
 
-Now the barista gives us back an espresso. And if we hand over the espresso, we get the espresso right back. So, boiling water plus ground coffee is an expression, but it isn't a value.[^homoiconicity] Boiling water is a value. Ground coffee is a value. Espresso is a value. Boiling water plus ground coffee is an expression.
+Maintenant, le bariste nous rend un expresso. Et si nous remettons l'espresso, nous récupérons celui-ci. L'eau bouillante et le café moulu sont donc une expression, mais ce n'est pas une valeur. [^homoiconicity] L'eau bouillante est une valeur. Le café moulu est une valeur. L'espresso est une valeur. L'eau bouillante plus le café moulu est une expression.
 
-[^homoiconicity]: In some languages, expressions are a kind of value unto themselves and can be manipulated. The grandfather of such languages is Lisp. JavaScript is not such a language, expressions in and of themselves are not values.
+[^homoiconicity]: Dans certains langages, les expressions sont une sorte de valeur en elles-mêmes et peuvent être manipulées. Le grand-père de ces langues est Lisp. JavaScript n'est pas un tel langage, les expressions en elles-mêmes ne sont pas des valeurs.
 
-Let's try this as well with something else the computer understands easily:
+Essayons aussi cela avec quelque chose d'autre que l'ordinateur comprend facilement:
 
     "JavaScript" + " " + "Allonge"
       //=> "JavaScript Allonge"
 
-Now we see that "strings" are values, and you can make an expression out of strings and an operator `+`. Since strings are values, they are also expressions by themselves. But strings with operators are not values, they are expressions. Now we know what was missing with our "coffee grounds plus hot water" example. The coffee grounds were a value, the boiling hot water was a value, and the "plus" operator between them made the whole thing an expression that was not a value.
+Nous voyons maintenant que les "chaînes" sont des valeurs et vous pouvez créer une expression à partir de chaînes et d'un opérateur `+`. Puisque les chaînes sont des valeurs, elles sont aussi des expressions en elles-mêmes. Mais les chaînes avec des opérateurs ne sont pas des valeurs, ce sont des expressions. Maintenant, nous savons ce qui manquait avec notre exemple "café moulu plus eau chaude". Le marc de café était une valeur, l’eau bouillante était une valeur et l’opérateur "plus" entre eux faisait de l’ensemble une expression qui n’était pas une valeur.
 
-## values and identity
+## valeurs et identité
 
-In JavaScript, we test whether two values are identical with the `===` operator, and whether they are not identical with the `!==` operator:
+En JavaScript, nous testons si deux valeurs sont identiques à l'opérateur `===` et si elles ne sont pas identiques à l'opérateur `! ==`:
 
 		2 === 2
 			//=> true
-			
+
 		'hello' !== 'goodbye'
 			//=> true
-			
-How does `===` work, exactly? Imagine that you're shown a cup of coffee. And then you're shown another cup of coffee. Are the two cups "identical?" In JavaScript, there are four possibilities:
 
-First, sometimes, the cups are of different kinds. One is a demitasse, the other a mug. This corresponds to comparing two things in JavaScript that have different *types*. For example, the string `"2"` is not the same thing as the number `2`. Strings and numbers are different types, so strings and numbers are never identical:
+Comment fonctionne `===`, exactement? Imaginez que l'on vous montre une tasse de café. Et puis on vous montre une autre tasse de café. Les deux tasses sont-elles "identiques ? " En JavaScript, il y a quatre possibilités :
+
+D'abord, parfois, les tasses sont de différentes sortes. L'un est une demitasse, l'autre une chope. Cela correspond à la comparaison de deux choses en JavaScript ayant différents *types*. Par exemple, la chaîne `"2"` n'est pas la même chose que le nombre `2`. Les chaînes et les nombres étant de types différents, les chaînes et les nombres ne sont jamais identiques:
 
     2 === '2'
       //=> false
-      
+
     true !== 'true'
       //=> true
 
-Second, sometimes, the cups are of the same type--perhaps two espresso cups--but they have different contents. One holds a single, one a double. This corresponds to comparing two JavaScript values that have the same type but different "content." For example, the number `5` is not the same thing as the number `2`.
+Deuxièmement, parfois, les tasses sont du même type--peut-être deux tasses à expresso--mais leur contenu est différent. L'un tient un simple, l'autre un double. Cela correspond à la comparaison de deux valeurs JavaScript qui ont le même type mais un "contenu" différent. Par exemple, le nombre `5` n'est pas la même chose que le nombre `2`.
 
     true === false
       //=> false
-      
+
     2 !== 5
       //=> true
-      
+
     'two' === 'five'
       //=> false
 
-What if the cups are of the same type *and* the contents are the same? Well, JavaScript's third and fourth possibilities cover that.
+Que se passe-t-il si les tasses sont du même type *et* que le contenu est le même? Eh bien, les troisième et quatrième possibilités de JavaScript couvrent cela.
 
-### value types
+### valeur types
 
-Third, some types of cups have no distinguishing marks on them. If they are the same kind of cup, and they hold the same contents, we have no way to tell the difference between them. This is the case with the strings, numbers, and booleans we have seen so far.
+Troisièmement, certains types de tasses ne portent aucune marque distinctive. S'ils sont du même genre de tasse et qu'ils ont le même contenu, nous n'avons aucun moyen de faire la différence entre eux. C'est le cas des chaînes, des nombres et des booléens que nous avons vus jusqu'à présent.
 
     2 + 2 === 4
       //=> true
-      
+
     (2 + 2 === 4) === (2 !== 5)
       //=> true
-      
-Note well what is happening with these examples: Even when we obtain a string, number, or boolean as the result of evaluating an expression, it is identical to another value of the same type with the same "content." Strings, numbers, and booleans are examples of what JavaScript calls "value" or "primitive" types. We'll use both terms interchangeably.
 
-We haven't encountered the fourth possibility yet. Stretching the metaphor somewhat, some types of cups have a serial number on the bottom. So even if you have two cups of the same type, and their contents are the same, you can still distinguish between them.
+Notez bien ce qui se passe avec ces exemples: même lorsque nous obtenons une chaîne, un nombre ou un booléen à la suite de l'évaluation d'une expression, celle-ci est identique à une autre valeur du même type avec le même "contenu". Les chaînes, les nombres et les booléens sont des exemples de ce que JavaScript appelle les types "valeur" ou "primitif". Nous utiliserons les deux termes de manière interchangeable.
+
+Nous n'avons pas encore rencontré la quatrième possibilité. Pour étirer un peu la métaphore, certains types de tasses ont un numéro de série sur le fond. Ainsi, même si vous avez deux tasses du même type et que leur contenu est identique, vous pouvez toujours les distinguer.
 
 ![Cafe Macchiato is also a fine drink, especially when following up on the fortunes of the Azzurri or the standings in the Giro D'Italia](images/macchiato_1200.jpg)
 
-### reference types
+### référence types
 
-So what kinds of values might be the same type and have the same contents, but not be considered identical to JavaScript? Let's meet a data structure that is very common in contemporary programming languages, the *Array* (other languages sometimes call it a List or a Vector).
+Alors, quels types de valeurs pourraient être du même type et avoir le même contenu, mais ne pas être considéré comme identique à JavaScript ? Rencontrons une structure de données très courante dans les langages de programmation contemporains, le *Array* (d'autres langages l'appellent parfois une liste ou un vecteur).
 
-An array looks like this: `[1, 2, 3]`. This is an expression, and you can combine `[]` with other expressions. Go wild with things like:
+Un tableau ressemble à ceci: `[1, 2, 3]`. Ceci est une expression, et vous pouvez combiner `[]` avec d'autres expressions. Laissez vous aller avec des choses comme :
 
     [2-1, 2, 2+1]
     [1, 1+1, 1+1+1]
-    
-Notice that you are always generating arrays with the same contents. But are they identical the same way that every value of `42` is identical to every other value of `42`? Try these for yourself:
+
+Notez que vous générez toujours des tableaux avec le même contenu. Mais sont-ils identiques de la même manière que chaque valeur de `42` est identique à toute autre valeur de `42` ? Essayez-les par vous-même:
 
     [2-1, 2, 2+1] === [1,2,3]
     [1,2,3] === [1, 2, 3]
     [1, 2, 3] === [1, 2, 3]
-  
-How about that! When you type `[1, 2, 3]` or any of its variations, you are typing an expression that generates its own *unique* array that is not identical to any other array, even if that other array also looks like `[1, 2, 3]`. It's as if JavaScript is generating new cups of coffee with serial numbers on the bottom.
 
-A> Arrays look exceedingly simple, but this word "reference" is so laden with possibilities that there's an entire chapter devoted to discussing [rebinding and references](#references). Try typing this code out:
+Que diriez-vous de ça! Lorsque vous tapez `[1, 2, 3]` ou l'une de ses variantes, vous saisissez une expression qui génère son propre tableau *unique* qui n'est identique à aucun autre tableau, même si ce dernier ressemble également à `[ 1, 2, 3]`. C'est comme si JavaScript générait de nouvelles tasses de café avec des numéros de série sur le fond.
+
+A> Les tableaux semblent extrêmement simples, mais ce mot "référence" est tellement chargé en possibilités qu'il existe un chapitre entier consacré à la discussion [rebinding and references](#references). Essayez de saisir ce code :
 A>
 A> <<(code/ouroboros.js)
 A>
-A> You've just created an [ouroborian](https://en.wikipedia.org/wiki/Ouroboros) array, an array that contains itself.
+A> Vous avez juste créé un [ouroborien](https://fr.wikipedia.org/wiki/Ouroboros) array, un array qui se contient lui même.
 
-They look the same, but if you examine them with `===`, you see that they are different. Every time you evaluate an expression (including typing something in) to create an array, you're creating a new, distinct value even if it *appears* to be the same as some other array value. As we'll see, this is true of many other kinds of values, including *functions*, the main subject of this book.
+Ils se ressemblent, mais si vous les examinez avec `===`, vous voyez qu'ils sont différents. Chaque fois que vous évaluez une expression (y compris en tapant quelque chose) pour créer un tableau, vous créez une nouvelle valeur distincte même si elle *semble* être identique à une autre valeur de tableau. Comme nous le verrons, cela est vrai de nombreux autres types de valeurs, notamment les *fonctions*, le sujet principal de ce livre.
