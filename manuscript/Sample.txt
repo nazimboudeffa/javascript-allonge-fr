@@ -1,0 +1,25 @@
+frontmatter:
+
+  markdown/Prefaces/title.md
+
+  markdown/Prefaces/fogus.md
+
+  markdown/Prefaces/matthewknox.md
+
+  markdown/Prefaces/about.md
+
+  markdown/Prefaces/recipes.md
+
+  markdown/Prefaces/legend.md
+
+  markdown/Prefaces/six.md
+
+  markdown/prelude.md
+
+mainmatter:
+
+    markdown/carmack.md
+
+    markdown/Functions/title.md
+
+      markdown/Functions/little.md

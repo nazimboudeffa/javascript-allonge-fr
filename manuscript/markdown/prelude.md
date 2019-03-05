@@ -9,7 +9,7 @@ Vous exprimez votre commande à un bout de leur comptoir, les gens derrière le 
 [expression]: https://fr.wikipedia.org/wiki/Expression_(informatique)
 [valeur]: https://fr.wikipedia.org/wiki/Valeur_(informatique)
 
-## valeurs and expressions
+## valeurs et expressions
 
 Toutes les valeurs sont des expressions. Dites que vous donnez au bariste un café Cubano. Eh oui, vous remettez une tasse de café infusé dans du sucre partiellement caramélisé. Vous dites : "Je veux un de ceux-ci." Le bariste n’est pas idiot, il vous le rend tout de suite et vous obtenez exactement ce que vous voulez. Ainsi, un café cubano est une expression (vous pouvez l'utiliser pour passer une commande) et une valeur (vous la récupérez du bariste).
 
