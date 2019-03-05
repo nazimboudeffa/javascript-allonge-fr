@@ -1,4 +1,4 @@
-## Foreword by Matthew Knox
+## Avant-Propos par Matthew Knox
 
 A different kind of language requires a different kind of book.
 
