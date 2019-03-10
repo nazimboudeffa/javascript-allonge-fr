@@ -2,35 +2,37 @@
 
 *Le matériel suivant est extrêmement basique, mais comme dans la plupart des histoires, la meilleure façon de commencer est de commencer au tout début.*
 
-Imaginez que nous visitons notre café préféré. Ils vous feront à peu près n'importe quelle boisson de votre choix, d'un expresso ristretto intense à un cappuccino sec, en passant par des préparations à base de café au goût de café contenant divers sirops et laits concentrés. (Vous tolérez l’existence de boissons sucrées car elles offrent une marge bénéficiaire suffisante à l’établissement pour que vous puissiez rester toute la journée avec votre partenaire via WiFi et en commandant une boisson à 3 $ toutes les quelques heures.)
+Imaginez que nous visitons notre café préféré. Ils nous feront à peu près n'importe quelle boisson de notre choix, d'un expresso ristretto intense à un cappuccino sec, en passant par des préparations à base de café au goût de café contenant divers sirops et laits concentrés. (Vous tolérez l’existence de boissons sucrées car elles offrent une marge bénéficiaire suffisante à l’établissement pour que vous puissiez rester toute la journée à procrastiner via la WiFi en commandant une boisson à 1,20 € toutes les quelques heures.)
 
-Vous exprimez votre commande à un bout de leur comptoir, les gens derrière le comptoir réalisent leur magie et livrent le café que vous appréciez à l'autre bout. C’est exactement comme cela que fonctionne l’environnement JavaScript aux fins de ce livre. Nous allons nous passer de serveurs Web, navigateurs et autres complexités et traiter ce modèle simple: vous donnez une [expression] à l'ordinateur, elle renvoie une [valeur], exactement comme vous exprimez vos souhaits à un bariste et recevez un café. en retour.
+Vous exprimez votre commande à un bout du comptoir, les gens derrière le comptoir réalisent la magie et vous livrent le café que vous appréciez à l'autre bout. C’est exactement comme cela que fonctionne l’environnement JavaScript aux fins de ce livre. Nous allons nous passer de serveurs Web, navigateurs et autres complexités et traiter ce modèle simple: vous donnez une [expression] à l'ordinateur, elle renvoie une [valeur], exactement comme vous exprimez vos souhaits à un bariste et recevez un café. en retour.
+
+Pous allons utiliser NodeJS, tout simplement en l'installant et en ouvrant une fenêtre de commande, on saisie `node` puis on execute notre code.
 
 [expression]: https://fr.wikipedia.org/wiki/Expression_(informatique)
 [valeur]: https://fr.wikipedia.org/wiki/Valeur_(informatique)
 
 ## valeurs et expressions
 
-Toutes les valeurs sont des expressions. Dites que vous donnez au bariste un café Cubano. Eh oui, vous remettez une tasse de café infusé dans du sucre partiellement caramélisé. Vous dites : "Je veux un de ceux-ci." Le bariste n’est pas idiot, il vous le rend tout de suite et vous obtenez exactement ce que vous voulez. Ainsi, un café cubano est une expression (vous pouvez l'utiliser pour passer une commande) et une valeur (vous la récupérez du bariste).
+Toutes les valeurs sont des expressions. Dites que vous commandez au bariste un café Cubano. Eh oui, vous remettez une tasse à café. Vous dites : "Je veux une de ces boissons." Le bariste n’est pas idiot, il vous rend la tasse tout de suite et vous obtenez exactement ce que vous voulez. Ainsi, un café cubano est une expression (vous pouvez l'utiliser pour passer une commande) et une valeur (vous la récupérez du bariste).
 
 Essayons ceci avec quelque chose que peut facilement comprendre l'ordinateur :
 
     42
 
-Est-ce que ceci est une expression? Une valeur? Aucune des deux? Ou les deux?
+Est-ce que ceci est une expression ? Une valeur ? Aucune des deux ? Ou les deux ?
 
-La réponse est que c’est à la fois une expression *et* une valeur. [^représentation] Il est très facile de dire que c’est très simple : lorsque vous le saisissez en JavaScript, vous obtenez la même chose, tout comme notre café Cubano. :
+La réponse est que c’est à la fois une expression *et* une valeur. [^représentation] Il est très facile de dire que c’est très simple : lorsque vous le saisissez en JavaScript, vous obtenez la même chose, tout comme notre café Cubano :
 
     42
       //=> 42
 
 [^représentation]: Techniquement, c'est une *représentation* d'une valeur utilisant la notation Base10, mais nous n'avons pas à nous en préoccuper dans ce livre. Vous et moi comprenons tous les deux que cela signifie "42", de même que l'ordinateur.
 
-Toutes les valeurs sont des expressions. C'est facile! Existe-t-il d'autres types d'expressions ? Sûr ! Retournons au café. Au lieu de remettre le café fini, nous pouvons remettre les ingrédients. Remettons un peu de café moulu et de l’eau bouillante.
+Toutes les valeurs sont des expressions. C'est facile ! Existe-t-il d'autres types d'expressions ? Biensûre ! Retournons au café. Au lieu de remettre le café fini, nous pouvons remettre les ingrédients. Remettons un peu de café moulu et de l’eau bouillante.
 
-A> Les lecteurs astucieux se rendront compte que nous omettons quelque chose. Toutes nos félicitations ! Prenez une gorgée d'espresso. Nous y reviendrons dans un instant.
+A> Les lecteurs astucieux se rendront compte que nous omettons quelque chose. Toutes nos félicitations ! Prenez une gorgée d'expresso. Nous y reviendrons dans un instant.
 
-Maintenant, le bariste nous rend un expresso. Et si nous remettons l'espresso, nous récupérons celui-ci. L'eau bouillante et le café moulu sont donc une expression, mais ce n'est pas une valeur. [^homoiconicity] L'eau bouillante est une valeur. Le café moulu est une valeur. L'espresso est une valeur. L'eau bouillante plus le café moulu est une expression.
+Maintenant, le bariste nous rend un expresso. Et si nous remettons l'expresso, nous récupérons celui-ci. L'eau bouillante et le café moulu sont donc une expression, mais ce n'est pas une valeur. [^homoiconicity] L'eau bouillante est une valeur. Le café moulu est une valeur. L'expresso est une valeur. L'eau bouillante plus le café moulu est une expression.
 
 [^homoiconicity]: Dans certains langages, les expressions sont une sorte de valeur en elles-mêmes et peuvent être manipulées. Le grand-père de ces langues est Lisp. JavaScript n'est pas un tel langage, les expressions en elles-mêmes ne sont pas des valeurs.
 
@@ -43,7 +45,7 @@ Nous voyons maintenant que les "chaînes" sont des valeurs et vous pouvez créer
 
 ## valeurs et identité
 
-En JavaScript, nous testons si deux valeurs sont identiques à l'opérateur `===` et si elles ne sont pas identiques à l'opérateur `! ==`:
+En JavaScript, nous testons si deux valeurs sont identiques à l'opérateur `===` et si elles ne sont pas identiques à l'opérateur `!==`:
 
 		2 === 2
 			//=> true
@@ -72,7 +74,7 @@ Deuxièmement, parfois, les tasses sont du même type--peut-être deux tasses à
     'two' === 'five'
       //=> false
 
-Que se passe-t-il si les tasses sont du même type *et* que le contenu est le même? Eh bien, les troisième et quatrième possibilités de JavaScript couvrent cela.
+Que se passe-t-il si les tasses sont du même type *et* que le contenu est le même ? Eh bien, les troisième et quatrième possibilités de JavaScript couvrent cela.
 
 ### valeur types
 
