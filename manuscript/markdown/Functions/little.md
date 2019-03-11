@@ -13,7 +13,7 @@ Quoi !? Pourquoi n'a-t-il pas tapé en retour `function(){}` pour nous ? Cela *s
 
 {pagebreak}
 
-A> Je préférerais autre chose, mais je dois accepter le fait que ce qui nous est dactylographié à l'écran est arbitraire, et tout ce qui compte, c'est qu'il soit quelque peu utile à la lecture par un humain. Mais nous devons comprendre que même si nous voyions `[Fonction]` ou `function () {}`, JavaScript a en interne une fonction complète et appropriée.
+A> Je préférerais autre chose, mais je dois accepter le fait que ce qui nous est dactylographié à l'écran est arbitraire, et tout ce qui compte, c'est qu'il soit quelque peu utile à la lecture par un humain. Mais nous devons comprendre que même si nous voyions `[Fonction]` ou `function(){}`, JavaScript a en interne une fonction complète et appropriée.
 
 ### fonctions et identités
 
