@@ -21,12 +21,12 @@ Essayons ceci avec quelque chose que peut facilement comprendre l'ordinateur :
 
 Est-ce que ceci est une expression ? Une valeur ? Aucune des deux ? Ou les deux ?
 
-La réponse est que c’est à la fois une expression *et* une valeur. [^représentation] Il est très facile de dire que c’est très simple : lorsque vous le saisissez en JavaScript, vous obtenez la même chose, tout comme notre café Cubano :
+La réponse est que c’est à la fois une expression *et* une valeur. [^representation] Il est très facile de dire que c’est très simple : lorsque vous le saisissez en JavaScript, vous obtenez la même chose, tout comme notre café Cubano :
 
     42
       //=> 42
 
-[^représentation]: Techniquement, c'est une *représentation* d'une valeur utilisant la notation Base10, mais nous n'avons pas à nous en préoccuper dans ce livre. Vous et moi comprenons tous les deux que cela signifie "42", de même que l'ordinateur.
+[^representation]: Techniquement, c'est une *représentation* d'une valeur utilisant la notation Base10, mais nous n'avons pas à nous en préoccuper dans ce livre. Vous et moi comprenons tous les deux que cela signifie "42", de même que l'ordinateur.
 
 Toutes les valeurs sont des expressions. C'est facile ! Existe-t-il d'autres types d'expressions ? Biensûre ! Retournons au café. Au lieu de remettre le café fini, nous pouvons remettre les ingrédients. Remettons un peu de café moulu et de l’eau bouillante.
 
