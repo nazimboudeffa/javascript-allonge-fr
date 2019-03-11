@@ -9,7 +9,7 @@ C'est une fonction qui n'est appliquée à aucune valeur et ne produit aucune va
     (function () {})
       //=> [Function]
 
-Quoi !? Pourquoi n'a-t-il pas tapé en retour `function () {}` pour nous ? Cela *semble* enfreindre notre règle voulant que si une expression est aussi une valeur, JavaScript nous restituera la même valeur. Que se passe-t-il? La réponse la plus simple et la plus simple est que, bien que l'interpréteur JavaScript renvoie effectivement cette valeur, son affichage à l'écran est une question légèrement différente. `[Fonction]` est un choix fait par ceux qui ont écrit Node.js, l'environnement JavaScript hébergeant JavaScript REPL. Si vous essayez la même chose dans un navigateur, vous verrez le code que vous avez tapé.
+Quoi !? Pourquoi n'a-t-il pas tapé en retour `function(){}` pour nous ? Cela *semble* enfreindre notre règle voulant que si une expression est aussi une valeur, JavaScript nous restituera la même valeur. Que se passe-t-il? La réponse la plus simple est que, bien que l'interpréteur JavaScript renvoie effectivement cette valeur, son affichage à l'écran est une question légèrement différente. `[Function]` est un choix fait par ceux qui ont écrit Node.js, l'environnement JavaScript hébergeant JavaScript REPL. Si vous essayez la même chose dans un navigateur, vous verrez le code que vous avez tapé.
 
 {pagebreak}
 

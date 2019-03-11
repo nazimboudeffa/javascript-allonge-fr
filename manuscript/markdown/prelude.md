@@ -30,6 +30,8 @@ La réponse est que c’est à la fois une expression *et* une valeur. [^représ
 
 Toutes les valeurs sont des expressions. C'est facile ! Existe-t-il d'autres types d'expressions ? Biensûre ! Retournons au café. Au lieu de remettre le café fini, nous pouvons remettre les ingrédients. Remettons un peu de café moulu et de l’eau bouillante.
 
+{pagebreak}
+
 A> Les lecteurs astucieux se rendront compte que nous omettons quelque chose. Toutes nos félicitations ! Prenez une gorgée d'expresso. Nous y reviendrons dans un instant.
 
 Maintenant, le bariste nous rend un expresso. Et si nous remettons l'expresso, nous récupérons celui-ci. L'eau bouillante et le café moulu sont donc une expression, mais ce n'est pas une valeur. [^homoiconicity] L'eau bouillante est une valeur. Le café moulu est une valeur. L'expresso est une valeur. L'eau bouillante plus le café moulu est une expression.
