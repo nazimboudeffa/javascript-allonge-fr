@@ -34,7 +34,7 @@ Voici comment nous appliquons une fonction à certaines valeurs en JavaScript: D
 
   *fn_expr*`(`*args*`)`
 
-Pour le moment, nous ne connaissons qu'une expression de ce type: `function () {}`, alors utilisons-la. Nous le mettrons entre parenthèses [^ambigu] pour que l’analyseur reste heureux, comme nous l’avons fait précédemment: `(function () {})`. Puisque nous ne lui donnons aucun argument, nous écrirons simplement `()` après l'expression. Alors nous écrivons :
+Pour le moment, nous ne connaissons qu'une expression de ce type: `function(){}`, alors utilisons-la. Nous le mettrons entre parenthèses [^ambigu] pour que l’analyseur reste heureux, comme nous l’avons fait précédemment: `(function(){})`. Puisque nous ne lui donnons aucun argument, nous écrirons simplement `()` après l'expression. Alors nous écrivons :
 
     (function () {})()
       //=> undefined
@@ -69,7 +69,7 @@ A> Vous pourriez penser que `undefined` en JavaScript est équivalent à `NULL` 
 
 Nous avons vu que JavaScript représente une valeur non définie en tapant `undefined`, et nous avons généré des valeurs non définies de deux manières :
 
-1. En évaluant une fonction qui ne renvoie pas de valeur `(function () {}) ()`, et;
+1. En évaluant une fonction qui ne renvoie pas de valeur `(function(){})()`, et;
 2. En écrivant `undefined` nous-mêmes.
 
 Il y a une troisième façon, avec l'opérateur `void` de JavaScript. Voir :
@@ -96,9 +96,9 @@ Retour à notre fonction. Nous avons évalué ceci :
     (function () {})()
       //=> undefined
 
-Rappelons que nous appliquions la fonction `function () {}` à aucun argument (car il n'y avait rien à l'intérieur de `()`). Alors, comment savons-nous qu'il faut s'attendre à `undefined` ? C'est facile:
+Rappelons que nous appliquions la fonction `function(){}` à aucun argument (car il n'y avait rien à l'intérieur de `()`). Alors, comment savons-nous qu'il faut s'attendre à `undefined` ? C'est facile:
 
-Lorsque nous définissons une fonction [^todonamed], nous écrivons le mot `fonction`. Nous mettons ensuite une liste d'arguments (éventuellement vide), puis nous donnons à la fonction un *corps* entre accolades `{...}`. Les corps de fonction sont des listes (éventuellement vides) *d'instructions* JavaScript séparées par des points-virgules.
+Lorsque nous définissons une fonction [^todonamed], nous écrivons le mot `function`. Nous mettons ensuite une liste d'arguments (éventuellement vide), puis nous donnons à la fonction un *corps* entre accolades `{...}`. Les corps de fonction sont des listes (éventuellement vides) *d'instructions* JavaScript séparées par des points-virgules.
 
 Quelque chose comme : { instruction^1^; instruction^2^; instruction^3^; ... ; instruction^n^ }
 
@@ -178,4 +178,4 @@ C'est une fonction, qui donne une fonction, qui donne `true`:
 
 Bien. Nous avons été très intelligents, mais jusqu'à présent, tout cela semble très abstrait. La diffraction d'un cristal est belle et intéressante en soi, mais vous ne pouvez pas nous en vouloir de vouloir lui montrer un usage pratique, comme pouvoir déterminer la composition d'une étoile à des millions d'années-lumière. Alors ... Dans le chapitre suivant, "[J'aimerais Avoir un Argument, S'il Vous Plait](#fargs)," nous allons voir comment faire des fonctions par la pratique.
 
-[^mouthful]: What a mouthful! C’est la raison pour laquelle d’autres langages, particulièrement axées sur les fonctions, proposent des syntaxes telles que ` -> -> undefined`
+[^mouthful]: What a mouthful! C’est la raison pour laquelle d’autres langages, particulièrement axées sur les fonctions, proposent des syntaxes telles que `-> -> undefined`
