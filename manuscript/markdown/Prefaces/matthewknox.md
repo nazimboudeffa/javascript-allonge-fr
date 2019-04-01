@@ -1,9 +1,9 @@
 ## Avant-Propos par Matthew Knox
 
-A different kind of language requires a different kind of book.
+Un style de langage différent nécessite un style de livre différent.
 
-JavaScript holds surprising depths--its scoping rules are neither strictly lexical nor strictly dynamic, and it supports procedural, object-oriented (in several flavors!), and functional programming.  Many books try to hide most of those capabilities away, giving you recipes for writing JavaScript in a way that approximates class-centric programming in other languages.  Not JavaScript Allongé.  It starts with the fundamentals of values, functions, and objects, and then guides you through JavaScript from the inside with exploratory bits of code that illustrate scoping, combinators, context, state, prototypes, and constructors.
+JavaScript détient une profondeur surprenante -- ses règles de portée ne sont ni strictement lexicales ni strictement dynamiques, et il prend en charge la programmation procédurale, orientée objet (dans plusieures saveurs ! ) et la programmation fonctionnelle.  De nombreux livres essaient de cacher la plupart de ces fonctionnalités, en vous proposant des recettes pour écrire du code JavaScript d'une manière qui se rapproche de la programmation centrée sur les classes dans d'autres langues. Pas JavaScript Allongé. Il commence par les principes fondamentaux des valeurs, des fonctions et des objets, puis vous guide à travers JavaScript avec des bits de code exploratoires illustrant la portée, les combinateurs, le contexte, les états, les prototypes et les constructeurs.
 
-Like JavaScript itself, this book gives you a gentle start before showing you its full depth, and like a Cafe Allongé, it's over too soon.  Enjoy!
+Comme JavaScript, ce livre vous donne un bon départ avant de vous montrer toute sa profondeur, et comme un Café Allongé, c'est fini trop tôt.  Bonne dégustation !
 
 --Matthew Knox, [mattknox.com](http://mattknox.com)
