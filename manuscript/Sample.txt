@@ -23,3 +23,5 @@ mainmatter:
     markdown/Functions/title.md
 
       markdown/Functions/little.md
+
+      markdown/Functions/args.md
