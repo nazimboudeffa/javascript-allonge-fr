@@ -1,6 +1,6 @@
 ## Ah. J'Aimerais Avoir un Argument, S'Il Vous Plait.[^mp] {#fargs}
 
-[^mp]: [The Argument Sketch](http://www.mindspring.com/~mfpatton/sketch.htm) de "Monty Python's Previous Record" et "Monty Python's Instant Record Collection"
+[^mp] : [The Argument Sketch](http://www.mindspring.com/~mfpatton/sketch.htm) de "Monty Python's Previous Record" et "Monty Python's Instant Record Collection"
 
 Jusqu'à présent, nous avons examiné des fonctions sans arguments. Nous n'avons même pas dit quel argument *est*, seulement que nos fonctions n'en ont aucun.
 
@@ -46,7 +46,7 @@ T> <<(code/f1.js)
 
 Comme la plupart des langages de programmation contemporains, JavaScript utilise "l'appel par valeur" [evaluation strategy]. Cela signifie que lorsque vous écrivez du code qui semble appliquer une fonction à une expression ou à des expressions, JavaScript évalue toutes ces expressions et applique les fonctions à la ou aux valeurs résultantes.
 
-[evaluation strategy]: http://en.wikipedia.org/wiki/Evaluation_strategy
+[evaluation strategy] : http://en.wikipedia.org/wiki/Evaluation_strategy
 
 Donc quand vous écrivez :
 
@@ -55,57 +55,57 @@ Donc quand vous écrivez :
 
 Ce qui se passe en interne est que l'expression `1 + 1` a été évaluée en premier, résultant en `2`. Puis notre fonction circonférence est appliquée à `2`.[^f2f]
 
-[^f2f]: Nous avons dit que vous ne pouvez pas appliquer une fonction à une expression. Vous * pouvez * appliquer une fonction à une ou plusieurs fonctions. Les fonctions sont des valeurs! Cela a des applications intéressantes, et elles seront explorées beaucoup plus à fond dans la suite [Functions That Are Applied to Functions](#consumers).
+[^f2f] : Nous avons dit que vous ne pouvez pas appliquer une fonction à une expression. Vous *pouvez* appliquer une fonction à une ou plusieurs fonctions. Les fonctions sont des valeurs! Cela a des applications intéressantes, et elles seront explorées beaucoup plus à fond dans la suite [Functions That Are Applied to Functions](#consumers).
 
-### variables and bindings
+### variables et liaisons
 
-Right now everything looks simple and straightforward, and we can move on to talk about arguments in more detail. And we're going to work our way up from `function (diameter) { return diameter * 3.14159265 }` to functions like:
+À l'heure actuelle, tout semble simple et direct, et nous pouvons passer aux arguments plus en détail. Et nous allons nous frayer un chemin à partir de `function (diameter) { return diameter * 3.14159265 }` jusqu'aux finctions comme :
 
     function (x) { return (function (y) { return x }) }
 
-A> `function (x) { return (function (y) { return x }) }` just looks crazy, as if we are learning English as a second language and the teacher promises us that soon we will be using words like *antidisestablishmentarianism*. Besides a desire to use long words to sound impressive, this is not going to seem attractive until we find ourselves wanting to discuss the role of the Church of England in 19th century British politics.
+A> `function (x) { return (function (y) { return x }) }` semble complètement déjanté, comme si nous apprenions l'anglais langue secondaire et que l'enseignant nous promet que nous utiliserons bientôt des mots comme *anticonsitutianaliarisme*. Outre le désir d'utiliser des mots longs pour paraître impressionnant, cela ne semblera pas attrayant tant que nous ne serons pas disposés à discuter du rôle de l'Église anglicane dans la politique britannique du XIXe siècle.
 A>
-A> But there's another reason for learning the word *antidisestablishmentarianism*: We might learn how prefixes and postfixes work in English grammar. It's the same thing with `function (x) { return (function (y) { return x }) }`. It has a certain important meaning in its own right, and it's also an excellent excuse to learn about functions that make functions, environments, variables, and more.
+A> Mais il y a une autre raison d'apprendre le mot *anticonsitutianaliarisme*: Nous pourrions apprendre comment fonctionnent les préfixes et les postfixes dans la grammaire anglaise. C'est la même chose avec `function (x) { return (function (y) { return x }) }`. Il a en lui-même une signification importante et constitue également une excellente excuse pour en savoir plus sur les fonctions qui créent des fonctions, des environnements, des variables, etc.
 
-In order to talk about how this works, we should agree on a few terms (you may already know them, but let's check-in together and "synchronize our dictionaries"). The first `x`, the one in `function (x) ...`, is an *argument*. The `y` in `function (y) ...` is another argument. The second `x`, the one in `{ return x }`, is not an argument, *it's an expression referring to a variable*. Arguments and variables work the same way whether we're talking about `function (x) { return (function (y) { return x }) }`  or just plain `function (x) { return x }`.
+Afin de parler de la façon dont cela fonctionne, nous devrions nous entendre sur quelques termes (vous les connaissez peut-être déjà, mais vérifions ensemble et synchronisons nos dictionnaires). Le premier `x`, celui dans `function (x) ...`, est un *argument*. Le `y` dans `function (y) ...` est un autre argument. Le second `x`, celui dans `{ return x }`, n'est pas un argument, *c'est une expression référençant une variable*. Les arguments et les variables fonctionnent de la même manière, qu'il s'agisse de `function (x) { return (function (y) { return x }) }`  ou tout simplement `function (x) { return x }`.
 
-Every time a function is invoked ("invoked" means "applied to zero or more arguments"), a new *environment* is created. An environment is a (possibly empty) dictionary that maps variables to values by name. The `x` in the expression that we call a "variable" is itself an expression that is evaluated by looking up the value in the environment.
+Chaque fois qu'une fonction est appelée ("invoqué" signifie "appliqué à zéro argument ou plus"), un nouvel *environnement* est créé. Un environnement est un dictionnaire (éventuellement vide) qui mappe des variables à des valeurs par leur nom. Le `x` dans l'expression que nous appelons une "variable" est lui-même une expression qui est évaluée en recherchant la valeur dans l'environnement.
 
-How does the value get put in the environment? Well for arguments, that is very simple. When you apply the function to the arguments, an entry is placed in the dictionary for each argument. So when we write:
+Comment la valeur est-elle mise dans l'environnement ? Hé bien pour les arguments, c'est très simple. Lorsque vous appliquez la fonction aux arguments, une entrée est placée dans le dictionnaire pour chaque argument. Alors quand on écrit:
 
     (function (x) { return x })(2)
       //=> 2
 
-What happens is this:
+Ce qui se passe est ceci :
 
-1. JavaScript parses this whole thing as an expression made up of several sub-expressions.
-1. It then starts evaluating the expression, including evaluating sub-expressions
-1. One sub-expression, `function (x) { return x }` evaluates to a function.
-1. Another, `2`, evaluates to the number 2.
-1. JavaScript now evaluates applying the function to the argument `2`. Here's where it gets interesting...
-1. An environment is created.
-1. The value '2' is bound to the name 'x' in the environment.
-1. The expression 'x' (the right side of the function) is evaluated within the environment we just created.
-1. The value of a variable when evaluated in an environment is the value bound to the variable's name in that environment, which is '2'
-1. And that's our result.
+1. JavaScript analyse tout cela comme une expression composée de plusieurs sous-expressions.
+1. Il commence ensuite à évaluer l'expression, y compris l'évaluation des sous-expressions.
+1. Une sous-expression, `function (x) { return x }` est évalué à une fonction.
+1. Un autre, `2`, est évalué au nombre 2.
+1. JavaScript évalue maintenant l'application de la fonction à l'argument `2`. Voici où ça devient intéressant ...
+1. Un environnement est créé.
+1. La veleur '2' est liée au nom 'x' dans l'environnement.
+1. L'expression 'x' (le côté droit de la fonction) est évalué dans l'environnement que nous venons de créer.
+1. La valeur d'une variable lorsqu'elle est évaluée dans un environnement est la valeur liée au nom de la variable dans cet environnement, qui est '2'
+1. Et c'est ça notre résultat.
 
-When we talk about environments, we'll use an [unsurprising syntax][json] for showing their bindings: `{x: 2, ...}`. meaning, that the environment is a dictionary, and that the value `2` is bound to the name `x`, and that there might be other stuff in that dictionary we aren't discussing right now.
+Lorsque nous parlons d’environnements, nous utilisons un [unsurprising syntax][json] pour montrer leurs liens : `{x: 2, ...}`. ce qui signifie que l'environnement est un dictionnaire et que la valeur `2` est liée au nom `x`, et qu'il pourrait y avoir d'autres choses dans ce dictionnaire dont nous ne discutons pas pour le moment.
 
-[json]: http://json.org/
+[json] : http://json.org/
 
-### call by sharing
+### appel par partage
 
-Earlier, we distinguished JavaScript's *value types* from its *reference types*. At that time, we looked at how JavaScript distinguishes objects that are identical from objects that are not. Now it is time to take another look at the distinction between value and reference types.
+Plus tôt, nous avons distingué les *types de valeur* de JavaScript de ses *types de référence*. À ce moment-là, nous avons examiné comment JavaScript distingue les objets identiques des objets qui ne le sont pas. Il est maintenant temps d'examiner à nouveau la distinction entre les types valeur et référence.
 
-There is a property that JavaScript strictly maintains: When a value--any value--is passed as an argument to a function, the value bound in the function's environment must be identical to the original.
+Il existe une propriété que JavaScript conserve de manière stricte: lorsqu'une valeur - n'importe quelle valeur - est transmise en tant qu'argument à une fonction, la valeur liée à l'environnement de la fonction doit être identique à l'original.
 
-We said that JavaScript binds names to values, but we didn't say what it means to bind a name to a value. Now we can elaborate: When JavaScript binds a value-type to a name, it makes a copy of the value and places the copy in the environment. As you recall, value types like strings and numbers are identical to each other if they have the same content. So JavaScript can make as many copies of strings, numbers, or booleans as it wishes.
+Nous avons dit que JavaScript lie les noms aux valeurs, mais nous n'avons pas précisé ce que signifie associer un nom à une valeur. Maintenant, nous pouvons élaborer: Lorsque JavaScript lie un type de valeur à un nom, il en fait une copie et place la copie dans l'environnement. Comme vous vous en souvenez, les types de valeur tels que les chaînes et les nombres sont identiques s'ils ont le même contenu. Donc, JavaScript peut faire autant de copies de chaînes, de nombres ou de booléens qu'il le souhaite.
 
-What about reference types? JavaScript does not place copies of reference values in any environment. JavaScript places *references* to reference types in environments, and when the value needs to be used, JavaScript uses the reference to obtain the original.
+Qu'en est-il des types de référence? JavaScript ne place des copies de valeurs de référence dans aucun environnement. JavaScript place *références* pour les types de référence dans les environnements, et lorsque la valeur doit être utilisée, JavaScript utilise la référence pour obtenir l'original.
 
-Because many references can share the same value, and because JavaScript passes references as arguments, JavaScript can be said to implement "call by sharing" semantics. Call by sharing is generally understood to be a specialization of call by value, and it explains why some values are known as value types and other values are known as reference types.
+Étant donné que de nombreuses références peuvent partager la même valeur et que JavaScript les transmet sous forme d'arguments, on peut dire que JavaScript implémente la sémantique "appel par partage". L'appel par partage est généralement compris comme une spécialisation d'appel par valeur. Il explique pourquoi certaines valeurs sont appelées types de valeur et d'autres valeurs, appelées types de référence.
 
-And with that, we're ready to look at *closures*. When we combine our knowledge of value types, reference types, arguments, and closures, we'll understand why this function always evaluates to `true` no matter what argument[^NaNPedantry] you apply it to:
+Et avec cela, nous sommes prêts à examiner les *fermetures*. Lorsque nous combinons notre connaissance des types de valeur, des types de référence, des arguments et des fermetures, nous comprenons pourquoi cette fonction est toujours évaluée comme suit : `true` peu importe l'argument [^NaNPedantry] vous l'appliquez à :
 
     function (value) {
       return (function (copy) {
@@ -113,4 +113,4 @@ And with that, we're ready to look at *closures*. When we combine our knowledge 
       })(value)
     }
 
-[^NaNPedantry]: Unless the argument is NaN, which isn't equal to anything, including itself
+[^NaNPedantry] : Sauf si l'argument est NaN, qui n'est égal à rien, y compris lui-même
