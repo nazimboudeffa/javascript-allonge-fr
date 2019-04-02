@@ -4,58 +4,58 @@
 
 Jusqu'à présent, nous avons examiné des fonctions sans arguments. Nous n'avons même pas dit quel argument *est*, seulement que nos fonctions n'en ont aucun.
 
-A> Most programmers are perfectly familiar with arguments (often called "parameters"). Secondary school mathematics discusses this. So you know what they are, and I know that you know what they are, but please be patient with the explanation!
+A> La plupart des programmeurs sont parfaitement familiers avec les arguments (souvent appelés "paramètres"). Les mathématiques du secondaire parlent de ça. Donc, vous savez ce qu’ils représentent, et je sais que vous savez ce qu’ils sont, mais s'il vous plaît soyez patient avec l’explication !
 
-Let's make a function with an argument:
+Faisons une fonction avec un argument :
 
     function (room) {}
 
-This function has one argument, `room`, and no body. Here's a function with two arguments and no body:
+Cette fonction a un argument, `room`, et pas de corps. Voici une fonction avec deux arguments et sans corps :
 
     function (room, board) {}
 
-I'm sure you are perfectly comfortable with the idea that this function has two arguments, `room`, and `board`. What does one do with the arguments? Use them in the body, of course. What do you think this is?
+Je suis sûr que vous êtes parfaitement à l'aise avec l'idée que cette fonction a deux arguments, `room`, et `board`. Que fait-on avec les arguments ? Les utiliser dans le corps, bien sûr. Qu'est-ce que vous pensez de ceci ?
 
     function (diameter) { return diameter * 3.14159265 }
 
-It's a function for calculating the circumference of a circle given the diameter. I read that aloud as "When applied to a value representing the diameter, this function *returns* the diameter times 3.14159265."
+C'est une fonction permettant de calculer la circonférence d'un cercle en fonction du diamètre. J'ai lu cela à haute voix comme "Appliquée à une valeur représentant le diamètre, cette fonction *renvoie* le diamètre multiplié par 3.14159265."
 
-Remember that to apply a function with no arguments, we wrote `(function () {})()`. To apply a function with an argument (or arguments), we put the argument (or arguments) within the parentheses, like this:
+Rappelez-vous que pour appliquer une fonction sans arguments, nous avons écrit `(function () {})()`. Pour appliquer une fonction avec un argument (ou des arguments), on place l’argument (ou les arguments) entre parenthèses, comme ceci :
 
     (function (diameter) { return diameter * 3.14159265 })(2)
       //=> 6.2831853
 
-You won't be surprised to see how to write and apply a function to two arguments:
+Vous ne serez pas surpris de voir comment écrire et appliquer une fonction à deux arguments :
 
     (function (room, board) { return room + board })(800, 150)
       //=> 950
 
-T> ### a quick summary of functions and bodies
+T> ### Un résumé rapide sur les fontions et les corps
 T>
-T> How arguments are used in a body's expression is probably perfectly obvious to you from the examples, especially if you've used any programming language (except for the dialect of BASIC--which I recall from my secondary school--that didn't allow parameters when you called a procedure).
+T> La façon dont les arguments sont utilisés dans l'expression d'un corps est probablement parfaitement évident pour vous d'après les exemples, surtout si vous avez utilisé un langage de programmation (à l'exception du dialecte BASIC - que je me souviens de mon école secondaire - qui n'autorisait pas les paramètres lorsque vous avez appelé une procédure).
 T>
-T> Expressions consist either of representations of values (like `3.14159265`, `true`, and `undefined`), operators that combine expressions (like `3 + 2`), some special forms like `[1, 2, 3]` for creating arrays out of expressions, or `function (`*arguments*`) {`*body-statements*`}` for creating functions.
+T> Les expressions soit des représentations de valeurs (comme `3.14159265`, `true`, et `undefined`), des opérateurs qui combinent les expressions (comme `3 + 2`), quelques formes spéciales comme `[1, 2, 3]` pour créer des tableaux à partir d'expressions, ou `function (`*arguments*`) {`*body-statements*`}` pour la création de fonctions.
 T>
-T> One of the important possible statements is a return statement. A return statement accepts any valid JavaScript expression.
+T> Une des déclarations importantes possibles est une déclaration de return. Une déclaration de return accepte toute expression JavaScript valide.
 T>
-T> This loose definition is recursive, so we can intuit (or use our experience with other languages) that since a function can contain a return statement with an expression, we can write a function that returns a function, or an array that contains another array expression. Or a function that returns an array, an array of functions, a function that returns an array of functions, and so forth:
+T> Cette définition pauvre est récursive, nous pouvons donc intuitivement (ou utiliser notre expérience avec d'autres langages) que, puisqu'une fonction peut contenir une instruction return avec une expression, nous pouvons écrire une fonction qui renvoie une fonction ou un tableau contenant une autre expression de tableau. . Ou une fonction qui retourne un tableau, un tableau de fonctions, une fonction qui retourne un tableau de fonctions, ainsi de suite :
 T>
 T> <<(code/f1.js)
 
-### call by value {#call-by-value}
+### appel par valeur {#call-by-value}
 
-Like most contemporary programming languages, JavaScript uses the "call by value" [evaluation strategy]. That means that when you write some code that appears to apply a function to an expression or expressions, JavaScript evaluates all of those expressions and applies the functions to the resulting value(s).
+Comme la plupart des langages de programmation contemporains, JavaScript utilise "l'appel par valeur" [evaluation strategy]. Cela signifie que lorsque vous écrivez du code qui semble appliquer une fonction à une expression ou à des expressions, JavaScript évalue toutes ces expressions et applique les fonctions à la ou aux valeurs résultantes.
 
 [evaluation strategy]: http://en.wikipedia.org/wiki/Evaluation_strategy
 
-So when you write:
+Donc quand vous écrivez :
 
     (function (diameter) { return diameter * 3.14159265 })(1 + 1)
       //=> 6.2831853
 
-What happened internally is that the expression `1 + 1` was evaluated first, resulting in `2`. Then our circumference function was applied to `2`.[^f2f]
+Ce qui se passe en interne est que l'expression `1 + 1` a été évaluée en premier, résultant en `2`. Puis notre fonction circonférence est appliquée à `2`.[^f2f]
 
-[^f2f]: We said that you can't apply a function to an expression. You *can* apply a function to one or more functions. Functions are values! This has interesting applications, and they will be explored much more thoroughly in [Functions That Are Applied to Functions](#consumers).
+[^f2f]: Nous avons dit que vous ne pouvez pas appliquer une fonction à une expression. Vous * pouvez * appliquer une fonction à une ou plusieurs fonctions. Les fonctions sont des valeurs! Cela a des applications intéressantes, et elles seront explorées beaucoup plus à fond dans la suite [Functions That Are Applied to Functions](#consumers).
 
 ### variables and bindings
 
