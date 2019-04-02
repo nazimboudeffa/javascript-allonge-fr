@@ -1,6 +1,6 @@
 ## Ah. J'Aimerais Avoir un Argument, S'Il Vous Plait.[^mp] {#fargs}
 
-[^mp] : [The Argument Sketch](http://www.mindspring.com/~mfpatton/sketch.htm) de "Monty Python's Previous Record" et "Monty Python's Instant Record Collection"
+[^mp]: [The Argument Sketch](http://www.mindspring.com/~mfpatton/sketch.htm) de "Monty Python's Previous Record" et "Monty Python's Instant Record Collection"
 
 Jusqu'à présent, nous avons examiné des fonctions sans arguments. Nous n'avons même pas dit quel argument *est*, seulement que nos fonctions n'en ont aucun.
 
@@ -46,7 +46,7 @@ T> <<(code/f1.js)
 
 Comme la plupart des langages de programmation contemporains, JavaScript utilise "l'appel par valeur" [evaluation strategy]. Cela signifie que lorsque vous écrivez du code qui semble appliquer une fonction à une expression ou à des expressions, JavaScript évalue toutes ces expressions et applique les fonctions à la ou aux valeurs résultantes.
 
-[evaluation strategy] : http://en.wikipedia.org/wiki/Evaluation_strategy
+[evaluation strategy]: http://en.wikipedia.org/wiki/Evaluation_strategy
 
 Donc quand vous écrivez :
 
@@ -55,7 +55,7 @@ Donc quand vous écrivez :
 
 Ce qui se passe en interne est que l'expression `1 + 1` a été évaluée en premier, résultant en `2`. Puis notre fonction circonférence est appliquée à `2`.[^f2f]
 
-[^f2f] : Nous avons dit que vous ne pouvez pas appliquer une fonction à une expression. Vous *pouvez* appliquer une fonction à une ou plusieurs fonctions. Les fonctions sont des valeurs! Cela a des applications intéressantes, et elles seront explorées beaucoup plus à fond dans la suite [Functions That Are Applied to Functions](#consumers).
+[^f2f]: Nous avons dit que vous ne pouvez pas appliquer une fonction à une expression. Vous *pouvez* appliquer une fonction à une ou plusieurs fonctions. Les fonctions sont des valeurs! Cela a des applications intéressantes, et elles seront explorées beaucoup plus à fond dans la suite [Functions That Are Applied to Functions](#consumers).
 
 ### variables et liaisons
 
@@ -91,7 +91,7 @@ Ce qui se passe est ceci :
 
 Lorsque nous parlons d’environnements, nous utilisons un [unsurprising syntax][json] pour montrer leurs liens : `{x: 2, ...}`. ce qui signifie que l'environnement est un dictionnaire et que la valeur `2` est liée au nom `x`, et qu'il pourrait y avoir d'autres choses dans ce dictionnaire dont nous ne discutons pas pour le moment.
 
-[json] : http://json.org/
+[json]: http://json.org/
 
 ### appel par partage
 
@@ -113,4 +113,4 @@ Et avec cela, nous sommes prêts à examiner les *fermetures*. Lorsque nous comb
       })(value)
     }
 
-[^NaNPedantry] : Sauf si l'argument est NaN, qui n'est égal à rien, y compris lui-même
+[^NaNPedantry]: Sauf si l'argument est NaN, qui n'est égal à rien, y compris lui-même
