@@ -18,7 +18,7 @@ Ainsi que comment cela fonctionne et comment le refactoriser quand vous avez bes
 
 Mais étant donné qu’il existe d’autres ressources et que les programmeurs sont des créatures curieuses qui ont une soif inépuisable de croissance personnelle, nous avons choisi de vous proposer des recettes que vous ne trouverez probablement pas ailleurs dans cette concentration. Les recettes renforcent les leçons du livre sur les fonctions en JavaScript.
 
-Vous trouverez toutes les recettes collectées en ligne sur [http://allong.es] (http://allong.es). Ils sont libres de partager sous la licence MIT.
+Vous trouverez toutes les recettes collectées en ligne sur [http://allong.es](http://allong.es). Ils sont libres de partager sous la licence MIT.
 
 [Reginald Braithwaite](http://braythwayt.com)  
 reg@braythwayt.com  
