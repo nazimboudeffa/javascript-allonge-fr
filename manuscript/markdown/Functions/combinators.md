@@ -2,45 +2,45 @@
 
 ### higher-order functions
 
-As we've seen, JavaScript functions take values as arguments and return values. JavaScript functions are values, so JavaScript functions can take functions as arguments, return functions, or both. Generally speaking, a function that either takes functions as arguments or returns a function (or both) is referred to as a "higher-order" function.
+Comme nous l'avons vu, les fonctions JavaScript prennent des valeurs comme arguments et renvoient des valeurs. Les fonctions JavaScript étant des valeurs, les fonctions JavaScript peuvent prendre des fonctions en tant qu'arguments, des fonctions de retour ou les deux. En règle générale, une fonction qui prend des fonctions en tant qu'arguments ou qui retourne une fonction (ou les deux) est appelée fonction "d'ordre supérieur".
 
-Here's a very simple higher-order function that takes a function as an argument:
+Voici une fonction très simple d'ordre supérieur qui prend une fonction en argument :
 
     function repeat (num, fn) {
       var i, value;
-      
+
       for (i = 1; i <= num; ++i)
         value = fn(i);
-      
+
       return value;
     }
-    
-    repeat(3, function () { 
-      console.log('Hello') 
+
+    repeat(3, function () {
+      console.log('Hello')
     })
       //=>
         'Hello'
         'Hello'
         'Hello'
         undefined
-    
-Higher-order functions dominate *JavaScript Allongé*. But before we go on, we'll talk about some specific types of higher-order functions.
+
+Les fonctions d'ordre supérieur dominent *JavaScript Rallongé*. Mais avant de continuer, nous allons parler de certains types spécifiques de fonctions d’ordre supérieur.
 
 ### combinators
 
-The word "combinator" has a precise technical meaning in mathematics:
+Le mot "combinateur" a une signification technique précise en mathématiques :
 
 > "A combinator is a higher-order function that uses only function application and earlier defined combinators to define a result from its arguments."--[Wikipedia][combinators]
 
 [combinators]: https://en.wikipedia.org/wiki/Combinatory_logic "Combinatory Logic"
 
-If we were learning Combinatorial Logic, we'd start with the most basic combinators like `S`, `K`, and `I`, and work up from there to practical combinators. We'd learn that the fundamental combinators are named after birds following the example of Raymond Smullyan's famous book [To Mock a Mockingbird][mock].
+Si nous apprenions la logique combinatoire, nous commencerions par les combinateurs les plus élémentaires tels que `S`, `K` et `I`, puis nous passerions à des combinateurs pratiques. Nous apprendrions que les combinateurs fondamentaux sont nommés d'après des oiseaux, à l'instar du célèbre livre de Raymond Smullyan [Mock a Mockingbird][mock].
 
 [mock]: http://www.amazon.com/gp/product/B00A1P096Y/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00A1P096Y&linkCode=as2&tag=raganwald001-20
 
-In this book, we will be using a looser definition of "combinator:" Higher-order pure functions that take only functions as arguments and return a function. We won't be strict about using only previously defined combinators in their construction.
+Dans ce livre, nous utiliserons une définition plus vague de "combinator:" Les fonctions pures d'ordre supérieur qui n'utilisent que des arguments et retournent une fonction. Nous ne serons pas stricts quant à l’utilisation de combinateurs précédemment définis dans leur construction.
 
-Let's start with a useful combinator: Most programmers call it *Compose*, although the logicians call it the B combinator or "Bluebird." Here is the typical[^bluebird] programming implementation:
+Commençons par un combinateur utile: la plupart des programmeurs l'appellent *Compose*, même si les logiciens l'appellent le combinateur B ou "Bluebird". Voici l'implémentation typique de la programmation [^bluebird] :
 
     function compose (a, b) {
       return function (c) {
@@ -48,35 +48,35 @@ Let's start with a useful combinator: Most programmers call it *Compose*, althou
       }
     }
 
-Let's say we have:
+Disons que nous avons :
 
     function addOne (number) {
       return number + 1
     }
-    
+
     function doubleOf (number) {
       return number * 2
     }
 
-With `compose`, anywhere you would write
+Avec `compose`, vous écrivez n'importe où
 
     function doubleOfAddOne (number) {
       return doubleOf(addOne(number))
     }
-    
-You could also write:
+
+Vous pouvez aussi écrire :
 
     var doubleOfAddOne = compose(doubleOf, addOne);
-    
-This is, of course, just one example of many. You'll find lots more perusing the recipes in this book. While some programmers believe "There Should Only Be One Way To Do It," having combinators available as well as explicitly writing things out with lots of symbols and keywords has some advantages when used judiciously.
 
-### a balanced statement about combinators
+Ce n’est bien sûr qu’un exemple parmi d’autres. Vous en trouverez beaucoup plus en parcourant les recettes de ce livre. Bien que certains programmeurs estiment qu’il ne devrait exister qu’une façon de le faire, le fait d’avoir des combinateurs disponibles et d’écrire explicitement avec beaucoup de symboles et de mots-clés présente certains avantages lorsqu’il est utilisé judicieusement.
 
-Code that uses a lot of combinators tends to name the verbs and adverbs (like `doubleOf`, `addOne`, and `compose`) while avoiding language keywords and the names of nouns (like `number`). So one perspective is that combinators are useful when you want to emphasize what you're doing and how it fits together, and more explicit code is useful when you want to emphasize what you're working with.
+### une déclaration équilibrée sur les combinateurs
+
+Le code qui utilise beaucoup de combinateurs a tendance à nommer les verbes et les adverbes (comme `doubleOf`,` addOne` et `compose`) tout en évitant les mots-clés de langue et les noms de noms (comme `number`). Ainsi, un point de vue est que les combinateurs sont utiles lorsque vous souhaitez mettre l'accent sur ce que vous faites et sur la manière dont cela s'articule, et un code plus explicite est utile lorsque vous souhaitez mettre l'accent sur ce avec quoi vous travaillez.
 
 ### function decorators {#decorators}
 
-A *function decorator* is a higher-order function that takes one function as an argument, returns another function, and the returned function is a variation of the argument function. Here's a ridiculous example of a decorator:
+Un *décorateur de fonction* est une fonction d'ordre supérieur qui prend une fonction en tant qu'argument, retourne une autre fonction, et la fonction renvoyée est une variante de la fonction argument. Voici un exemple ridicule de décorateur:
 
     function not (fn) {
       return function (argument) {
@@ -84,22 +84,24 @@ A *function decorator* is a higher-order function that takes one function as an 
       }
     }
 
-So instead of writing `!someFunction(42)`, you can write `not(someFunction)(42)`. Hardly progress. But like for `compose`, if you have:
+Ainsi, au lieu d'écrire `!SomeFunction (42)`, vous pouvez écrire `not(someFunction)(42)`. Peu de progrès. Mais comme pour `compose`, si vous avez :
 
     function something (x) {
       return x != null
     }
 
-Then you could write either:
+Ensuite, vous pouvez écrire soit :
 
     function nothing (x) {
       return !something(x)
     }
 
-Or:
+Ou :
 
     var nothing = not(something);
 
 `not` is a function decorator because it modifies a function while remaining strongly related to the original function's semantics. You'll see other function decorators in the recipes, like [once](#once), [mapWith](#mapWith), and [maybe](#maybe). Function decorators aren't strict about being pure functions, so there's more latitude for making decorators than combinators.
 
-[^bluebird]: As we'll discuss later, this implementation of the B Combinator is correct in languages like Scheme, but for truly general-purpose use in JavaScript it needs to correctly manage the [function context](#context).
+`not` est un décorateur de fonctions car il modifie une fonction tout en restant fortement lié à la sémantique de la fonction d'origine. Vous verrez d'autres décorateurs de fonctions dans les recettes, comme [une fois](#once), [mapWith](#mapWith) et [peut-être](#maybe). Les décorateurs de fonctions ne sont pas stricts sur le fait d'être des fonctions pures. Il est donc plus facile de faire des décorateurs que des combinateurs.
+
+[^bluebird]: Comme nous le verrons plus tard, cette implémentation du B Combinator est correcte dans des langages tels que Scheme, mais pour une utilisation véritablement polyvalente en JavaScript, elle doit gérer correctement le [function context](#context).
