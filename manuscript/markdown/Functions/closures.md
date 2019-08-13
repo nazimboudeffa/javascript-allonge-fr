@@ -155,6 +155,4 @@ Parfois, les programmeurs souhaitent éviter cela. Si vous ne souhaitez pas que 
     })();
     // bottom of the file
 
-The effect is to insert a new, empty environment in between the global environment and your own functions: `{x: 1, '..': {'..': `*global environment*`}}`. As we'll see when we discuss mutable state, this helps to prevent programmers from accidentally changing the global state that is shared by code in every file when they use the [var keyword](#var) properly.
-
 Cela a pour effet d'insérer un nouvel environnement vide entre l'environnement global et vos propres fonctions: `{x: 1, '..': {'..': `*environnement global*`}}`. Comme nous le verrons plus tard, cela permet d'éviter que les programmeurs modifient accidentellement l'état global partagé par le code dans chaque fichier lorsqu'ils utilisent correctement le [mot-clé var](#var).
