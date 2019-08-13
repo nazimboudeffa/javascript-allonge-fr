@@ -1,6 +1,6 @@
 ## Closures and Scope {#closures}
 
-It's time to see how a function within a function works:
+Il est temps de voir comment une fonction dans une fonction fonctionne :
 
     (function (x) {
       return function (y) {
@@ -9,7 +9,7 @@ It's time to see how a function within a function works:
     })(1)(2)
       //=> 1
 
-First off, let's use what we learned above. Given `(`*some function*`)(`*some argument*`)`, we know that we apply the function to the argument, create an environment, bind the value of the argument to the name, and evaluate the function's expression. So we do that first with this code:
+Tout d'abord, utilisons ce que nous avons appris ci-dessus. Étant donné `(`*une fonction*`) (`*un argument*`)`, nous savons que nous faisons un bind de la fonction à l'argument, créons un environnement, lions la valeur de l'argument au nom et évaluons l'expression de la fonction . Donc, nous le faisons d'abord avec ce code :
 
     (function (x) {
       return function (y) {
@@ -17,72 +17,72 @@ First off, let's use what we learned above. Given `(`*some function*`)(`*some ar
       }
     })(1)
       //=> [Function]
-      
-The environment belonging to the function with signature `function (x) ...` becomes `{x: 1, ...}`, and the result of applying the function is another function value. It makes sense that the result value is a function, because the expression for `function (x) ...`'s body is:
+
+L'environnement appartenant à la fonction portant la signature `function (x) ...` devient `{x: 1, ...}` et le résultat de l'application de la fonction est une autre valeur de la fonction. Il est logique que la valeur du résultat soit une fonction, car l'expression du corps de `function (x) ...` est la suivante :
 
       function (y) {
         return x
       }
 
-So now we have a value representing that function. Then we're going to take the value of that function and apply it to the argument `2`, something like this:
+Alors maintenant, nous avons une valeur représentant cette fonction. Ensuite, nous allons prendre la valeur de cette fonction et l'appliquer à l'argument `2`, quelque chose comme ceci :
 
       (function (y) {
         return x
       })(2)
 
-So we seem to get a new environment `{y: 2, ...}`. How is the expression `x` going to be evaluated in that function's environment? There is no `x` in its environment, it must come from somewhere else.
+Il semble donc que nous obtenons un nouvel environnement `{y: 2, ...}`. Comment l'expression `x` va-t-elle être évaluée dans l'environnement de cette fonction ? Il n'y a pas de `x` dans son environnement, il doit venir d'ailleurs.
 
-A> This, by the way, is one of the great defining characteristics of JavaScript and languages in the same family: Whether they allow things like functions to nest inside each other, and if so, how they handle variables from "outside" of a function that are referenced inside a function. For example, here's the equivalent code in Ruby:
+A> C’est d’ailleurs l’une des caractéristiques déterminantes de JavaScript et des langages de la même famille : S’ils permettent à des choses telles que des fonctions de s’emboîter les unes dans les autres et, dans l’affirmative, comment elles gèrent les variables "de fonction qui sont référencés à l'intérieur d'une fonction. Par exemple, voici le code équivalent en Ruby :
 A>
 A> <<(code/k.rb)
 A>
-A> Now let's enjoy a relaxed Allongé before we continue!
+A> Maintenant, profitons d'un Rallongé détendu avant de continuer!
 
-### If functions without free variables are pure, are closures impure?
+### Si les fonctions sans variables libres sont pures, les fermetures sont-elles impures ?
 
-The function `function (y) { return x }` is interesting. It contains a *free variable*, `x`.[^nonlocal] A free variable is one that is not bound within the function. Up to now, we've only seen one way to "bind" a variable, namely by passing in an argument with the same name. Since the function `function (y) { return x }` doesn't have an argument named `x`, the variable `x` isn't bound in this function, which makes it "free."
+La fonction `function (y) {return x}` est intéressante. Il contient une *variable libre*, `x`. [^nonlocal] Une variable libre est une variable qui n'est pas liée à la fonction. Jusqu'à présent, nous n'avons vu qu'un moyen de "faire un bind" à une variable, à savoir en passant un argument portant le même nom. Puisque la fonction `function (y) {return x}` n'a pas d'argument nommé `x`, la variable` x` n'est pas liée à cette fonction, ce qui la rend "libre".
 
-[^nonlocal]: You may also hear the term "non-local variable." [Both are correct.](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables) 
+[^nonlocal]: Vous avez pu également entendre le terme "variable non locale". [Les deux sont corrects.](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables)
 
-Now that we know that variables used in a function are either bound or free, we can bifurcate functions into those with free variables and those without:
+Maintenant que nous savons que les variables utilisées dans une fonction sont liées ou libres, nous pouvons bifurquer les fonctions dans celles avec des variables libres et celles sans :
 
-  * Functions containing no free variables are called *pure functions*.
-  * Functions containing one or more free variables are called *closures*.
-  
-Pure functions are easiest to understand. They always mean the same thing wherever you use them. Here are some pure functions we've already seen:
+  * Les fonctions ne contenant aucune variable libre sont appelées *fonctions pures*.
+  * Les fonctions contenant une ou plusieurs variables libres sont appelées *fermetures*.
+
+Les fonctions pures sont les plus faciles à comprendre. Ils signifient toujours la même chose, peu importe où vous les utilisez. Voici quelques fonctions pures que nous avons déjà vues :
 
     function () {}
-    
+
     function (x) {
       return x
     }
-      
+
     function (x) {
       return function (y) {
         return x
       }
     }
 
-The first function doesn't have any variables, therefore doesn't have any free variables. The second doesn't have any free variables, because its only variable is bound. The third one is actually two functions, one inside the other. `function (y) ...` has a free variable, but the entire expression refers to `function (x) ...`, and it doesn't have a free variable: The only variable anywhere in its body is `x`, which is certainly bound within `function (x) ...`.
+La première fonction ne contient aucune variable, donc aucune variable libre. La seconde n'a pas de variables libres, car sa seule variable est liée. Le troisième est en fait deux fonctions, l'une dans l'autre. `function (y) ...` a une variable libre, mais l'expression entière se réfère à `function (x) ...`, et elle n'a pas de variable libre: la seule variable dans son corps est `x`, qui est certainement lié à `function (x) ...`.
 
-From this, we learn something: A pure function can contain a closure.
+Nous en apprenons quelque chose: une fonction pure peut contenir une fermeture.
 
-X> If pure functions can contain closures, can a closure contain a pure function? Using only what we've learned so far, attempt to compose a closure that contains a pure function. If you can't, give your reasoning for why it's impossible.
+X>Si les fonctions pures peuvent contenir des fermetures, une fermeture peut-elle contenir une fonction pure? En utilisant uniquement ce que nous avons appris jusqu'à présent, essayez de composer une fermeture contenant une fonction pure. Si vous ne pouvez pas, expliquez pourquoi c'est impossible.
 
-Pure functions always mean the same thing because all of their "inputs" are fully defined by their arguments. Not so with a closure. If I present to you this pure function `function (x, y) { return x + y }`, we know exactly what it does with `(2, 2)`. But what about this closure: `function (y) { return x + y }`? We can't say what it will do with argument `(2)` without understanding the magic for evaluating the free variable `x`.
+Les fonctions pures signifient toujours la même chose parce que toutes leurs "entrées" sont entièrement définies par leurs arguments. Pas si avec une fermeture. Si je vous présente cette fonction pure `function (x, y) {return x + y}`, nous savons exactement ce qu'elle fait avec `(2, 2)`. Mais qu'en est-il de cette fermeture : `function (y) {return x + y}`? Nous ne pouvons pas dire ce qu'il fera avec l'argument `(2)` sans comprendre la magie pour évaluer la variable libre `x`.
 
-### it's always the environment
+### c'est toujours l'environnement
 
-To understand how closures are evaluated, we need to revisit environments. As we've said before, all functions are associated with an environment. We also hand-waved something when describing our environment. Remember that we said the environment for `(function (x) { return (function (y) { return x }) })(1)` is `{x: 1, ...}` and that the environment for `(function (y) { return x })(2)` is `{y: 2, ...}`? Let's fill in the blanks!
+Pour comprendre comment les fermetures sont évaluées, nous devons revisiter les environnements. Comme nous l'avons dit précédemment, toutes les fonctions sont associées à un environnement. Nous avons également agité quelque chose lorsque nous avons décrit notre environnement. Rappelez-vous que nous avons dit que l'environnement pour `(function (x) {return (function (y) {return x})}) (1)` est `{x: 1, ...}` et que l'environnement pour `( function (y) {return x}) (2)` est `{y: 2, ...}` ? Remplissons les blancs!
 
-The environment for `(function (y) { return x })(2)` is *actually* `{y: 2, '..': {x: 1, ...}}`. `'..'` means something like "parent" or "enclosure" or "super-environment." It's `function (x) ...`'s environment, because the function `function (y) { return x }` is within `function (x) ...`'s body. So whenever a function is applied to arguments, its environment always has a reference to its parent environment.
+L’environnement de `(fonction (y) {return x}) (2)` est *actuellement* `{y: 2, '..': {x: 1, ...}}`. `'..'` signifie quelque chose comme "parent" ou "enceinte" ou "super-environnement". C'est l'environnement de `function (x) ...`, car la fonction `function (y) {return x}` est dans le corps de `function (x) ...`. Ainsi, chaque fois qu'une fonction est appliquée à des arguments, son environnement a toujours une référence à son environnement parent.
 
-And now you can guess how we evaluate `(function (y) { return x })(2)` in the environment `{y: 2, '..': {x: 1, ...}}`. The variable `x` isn't in `function (y) ...`'s immediate environment, but it is in its parent's environment, so it evaluates to `1` and that's what `(function (y) { return x })(2)` returns even though it ended up ignoring its own argument.
+Et maintenant, vous pouvez deviner comment nous évaluons `(function (y) {return x}) (2)` dans l'environnement `{y: 2, '..': {x: 1, ...}}`. La variable `x` n'est pas dans l'environnement immédiat de `function (y) ...`, mais elle se trouve dans l'environnement de son parent, elle est donc évaluée à `1` et c'est ce que `(function (y) {return x }) (2)` retourne même si elle a fini par ignorer son propre argument.
 
-A> `function (x) { return x }` is called the I Combinator or Identity Function. `function (x) { return (function (y) { return x }) }` is called the K Combinator or Kestrel. Some people get so excited by this that they write entire books about them, some are [great][mock], some--how shall I put this--are [interesting][interesting] if you use Ruby.
+A> `function (x) { return x }` est appelée Combinator ou Identity Function. `function (x) { return (function (y) { return x }) }` est appelée le K Combinator ou Kestrel. Certaines personnes sont tellement excitées par cela qu'elles écrivent des livres entiers à leur sujet, certains sont géniaux [génial][mock], ce--pendant devrais-je mettre ceux-là--sont [intéressant][intéressantes] si vous utilisez Ruby.
 
 [mock]: http://www.amzn.com/0192801422?tag=raganwald001-20
-[interesting]: https://leanpub.com/combinators "Kestrels, Quirky Birds, and Hopeless Egocentricity"
+[intéressant]: https://leanpub.com/combinators "Kestrels, Quirky Birds, and Hopeless Egocentricity"
 
 Functions can have grandparents too:
 
@@ -94,24 +94,24 @@ Functions can have grandparents too:
       }
     }
 
-This function does much the same thing as:
+Cette fonction fait à peu près la même chose que :
 
     function (x, y, z) {
       return x + y + z
     }
 
-Only you call it with `(1)(2)(3)` instead of `(1, 2, 3)`. The other big difference is that you can call it with `(1)` and get a function back that you can later call with `(2)(3)`.
+Seulement vous l'appelez avec `(1)(2)(3)` au lieu de `(1, 2, 3)`. L'autre grande différence est que vous pouvez l'appeler avec `(1)` et obtenir une fonction que vous pourrez appeler plus tard avec `(2)(3)`.
 
 {pagebreak}
 
-A> The first function is the result of [currying] the second function. Calling a curried function with only some of its arguments is sometimes called [partial application]. Some programming languages automatically curry and partially evaluate functions without the need to manually nest them.
+A> La première fonction est le résultat de [currying] la deuxième fonction. L'appel d'une curried fonction avec seulement certains de ses arguments est parfois appelé [application partielle]. Certains langages de programmation sont automatiquement curry et évaluent partiellement des fonctions sans qu'il soit nécessaire de les imbriquer manuellement.
 
 [currying]: https://en.wikipedia.org/wiki/Currying
-[partial application]: https://en.wikipedia.org/wiki/Partial_application
+[application partielle]: https://en.wikipedia.org/wiki/Partial_application
 
 ### shadowy variables from a shadowy planet
 
-An interesting thing happens when a variable has the same name as an ancestor environment's variable. Consider:
+Une chose intéressante se produit lorsqu'une variable porte le même nom que la variable d'un environnement ancêtre. Considérerons :
 
     function (x) {
       return function (x, y) {
@@ -119,7 +119,7 @@ An interesting thing happens when a variable has the same name as an ancestor en
       }
     }
 
-The function `function (x, y) { return x + y }` is a pure function, because its `x` is defined within its own environment. Although its parent also defines an `x`, it is ignored when evaluating `x + y`. JavaScript always searches for a binding starting with the functions own environment and then each parent in turn until it finds one. The same is true of:
+La fonction `fonction (x, y) {return x + y}` est une fonction pure, car son `x` est défini dans son propre environnement. Bien que son parent définisse également un `x`, il est ignoré lors de l'évaluation de `x + y`. JavaScript recherche toujours une liaison en commençant par l'environnement propre des fonctions, puis par chaque parent jusqu'à ce qu'il en trouve un. La même chose est vraie de :
 
     function (x) {
       return function (x, y) {
@@ -130,27 +130,31 @@ The function `function (x, y) { return x + y }` is a pure function, because its 
         }
       }
     }
-          
+
 When evaluating `x + y + z`, JavaScript will find `x` and `y` in the great-grandparent scope and `z` in the parent scope. The `x` in the great-great-grandparent scope is ignored, as are both `w`s. When a variable has the same name as an ancestor environment's binding, it is said to *shadow* the ancestor.
 
-This is often a good thing.
+Lors de l'évaluation de `x + y + z`, JavaScript trouvera `x` et `y` dans la portée des arrière-grands-parents et `z` dans la portée du parent. Le `x` dans la portée arrière-arrière-arrière-grand-parent est ignoré, comme le sont les deux `w`. Lorsqu'une variable porte le même nom que la liaison d'un environnement ancêtre, on dit qu'elle *shadow* l'ancêtre.
 
-### which came first, the chicken or the egg?
+C'est souvent une bonne chose.
 
-This behaviour of pure functions and closures has many, many consequences that can be exploited to write software. We are going to explore them in some detail as well as look at some of the other mechanisms JavaScript provides for working with variables and mutable state.
+### qui est venu en premier, l'œuf ou la poule ?
 
-But before we do so, there's one final question: Where does the ancestry start? If there's no other code in a file, what is `function (x) { return x }`'s parent environment?
+Ce comportement de fonctions pures et de fermetures a de très nombreuses conséquences qui peuvent être exploitées pour écrire un logiciel. Nous allons les explorer en détail et examiner certains des autres mécanismes fournis par JavaScript pour travailler avec des variables et des états mutables.
 
-JavaScript always has the notion of at least one environment we do not control: A global environment in which many useful things are bound such as libraries full of standard functions. So when you invoke `(function (x) { return x })(1)` in the REPL, its full environment is going to look like this: `{x: 1, '..': `*global environment*`}`.
+Mais avant cela, il y a une dernière question: où commence l'ascendance? S'il n'y a pas d'autre code dans un fichier, qu'est-ce que l'environnement parent de `function (x) {return x}` ?
 
-Sometimes, programmers wish to avoid this. If you don't want your code to operate directly within the global environment, what can you do? Create an environment for them, of course. Many programmers choose to write every JavaScript file like this:
+JavaScript a toujours la notion d'au moins un environnement que nous ne contrôlons pas: un environnement global dans lequel de nombreuses choses utiles sont liées, telles que des bibliothèques remplies de fonctions standard. Ainsi, lorsque vous appelez `(function (x) {return x}) (1)` dans le REPL, son environnement complet va ressembler à ceci : `{x: 1, '..': `*environnement global*`}`.
+
+Parfois, les programmeurs souhaitent éviter cela. Si vous ne souhaitez pas que votre code fonctionne directement dans l'environnement global, que pouvez-vous faire? Créer un environnement pour eux, bien sûr. Beaucoup de programmeurs choisissent d'écrire chaque fichier JavaScript comme ceci :
 
     // top of the file
     (function () {
-      
+
       // ... lots of JavaScript ...
-      
+
     })();
     // bottom of the file
 
 The effect is to insert a new, empty environment in between the global environment and your own functions: `{x: 1, '..': {'..': `*global environment*`}}`. As we'll see when we discuss mutable state, this helps to prevent programmers from accidentally changing the global state that is shared by code in every file when they use the [var keyword](#var) properly.
+
+Cela a pour effet d'insérer un nouvel environnement vide entre l'environnement global et vos propres fonctions: `{x: 1, '..': {'..': `*environnement global*`}}`. Comme nous le verrons plus tard, cela permet d'éviter que les programmeurs modifient accidentellement l'état global partagé par le code dans chaque fichier lorsqu'ils utilisent correctement le [mot-clé var](#var).
