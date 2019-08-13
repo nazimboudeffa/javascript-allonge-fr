@@ -1,43 +1,43 @@
 ## Naming Functions {#named-function-expressions}
 
-Let's get right to it. This code does *not* name a function:
+Allons droit au but. Ce code ne nomme *pas* une fonction :
 
     var repeat = function (str) {
       return str + str
     };
-    
-It doesn't name the function "repeat" for the same reason that `var answer = 42` doesn't name the number `42`. That snippet of code binds an anonymous function to a name in an environment, but the function itself remains anonymous.
 
-JavaScript *does* have a syntax for naming a function, it looks like this:
+Il ne nomme pas la fonction "répéter" pour la même raison que `var answer = 42` ne nomme pas le nombre `42`. Cet extrait de code lie une fonction anonyme à un nom dans un environnement, mais la fonction elle-même reste anonyme.
+
+JavaScript *a* une syntaxe pour nommer une fonction, cela ressemble à ceci:
 
     var bindingName = function actualName () {
       //...
     };
 
-In this expression, `bindingName` is the name in the environment, but `actualName` is the function's actual name. This is a *named function expression*. That may seem confusing, but think of the binding names as properties of the environment, not the function itself. And indeed the name *is* a property:
+Dans cette expression, `bindingName` est le nom de l'environnement, mais `actualName` est le nom réel de la fonction. Ceci est une expression de fonction *nommée*. Cela peut paraître déroutant, mais considérez les noms de liaison comme des propriétés de l’environnement, et non de la fonction elle-même. Et en effet le nom *est* une propriété:
 
     bindingName.name
       //=> 'actualName'
 
-In this book we are not examining JavaScript's tooling such as debuggers baked into browsers, but we will note that when you are navigating call stacks in all modern tools, the function's binding name is ignored but its actual name is displayed, so naming functions is very useful even if they don't get a formal binding, e.g.
+Dans ce livre, nous n'examinons pas les outils JavaScript, tels que les débogueurs intégrés aux navigateurs, mais nous noterons que lorsque vous parcourez des piles d'appels dans tous les outils modernes, le nom de la liaison de la fonction est ignoré, mais son nom actuel est affiché. utiles même s'ils n'obtiennent pas de liaison formelle, par exemple
 
     someBackboneView.on('click', function clickHandler () {
       //...
     });
 
-Now, the function's actual name has no effect on the environment in which it is used. To whit:
+Désormais, le nom réel de la fonction n'a aucun effet sur l'environnement dans lequel elle est utilisée. À blanc :
 
     var bindingName = function actualName () {
       //...
     };
-    
+
     bindingName
       //=> [Function: actualName]
 
     actualName
       //=> ReferenceError: actualName is not defined
-      
-So "actualName" isn't bound in the environment where we use the named function expression. Is it bound anywhere else? Yes it is:
+
+Donc, "actualName" n'est pas lié à l'environnement dans lequel nous utilisons l'expression de fonction nommée. Est-ce lié ailleurs ? Oui, ça l'est :
 
     var fn = function even (n) {
       if (n === 0) {
@@ -45,64 +45,64 @@ So "actualName" isn't bound in the environment where we use the named function e
       }
       else return !even(n - 1)
     }
-    
+
     fn(5)
       //=> false
-    
+
     fn(2)
       //=> true
-      
-`even` is bound within the function itself, but not outside it. This is useful for making recursive functions.
-    
-### function declarations
 
-We've actually buried the lede.[^lede] Naming functions for the purpose of debugging is not as important as what we're about to discuss. There is another syntax for naming and/or defining a function. It's called a *function declaration*, and it looks like this:
+`even` est lié à la fonction elle-même, mais pas à l'extérieur. Ceci est utile pour créer des fonctions récursives.
+
+### déclarations de fonction
+
+Nous avons en fait enterré le fil. [^ Lede] Nommer des fonctions dans le but de déboguer n’est pas aussi important que ce que nous sommes sur le point de discuter. Il existe une autre syntaxe pour nommer et / ou définir une fonction. Cela s'appelle une *déclaration de fonction*, et cela ressemble à ceci :
 
     function someName () {
       // ...
     }
-    
-This behaves a *little* like:
+
+Cela se comporte un *peu* comme :
 
     var someName = function someName () {
       // ...
     }
-    
-In that it binds a name in the environment to a named function. However, consider this piece of code:
+
+En cela, il lie un nom dans l'environnement à une fonction nommée. Cependant, considérons ce morceau de code :
 
     (function () {
       return someName;
-      
+
       var someName = function someName () {
         // ...
       }
     })()
       //=> undefined  
-      
-This is what we expect given what we learned about [var](#var): Although `someName` is declared later in the function, JavaScript behaves as if you'd written:
+
+C’est ce à quoi nous nous attendons compte tenu de ce que nous avons appris sur [var](# var) : Bien que `someName` soit déclaré plus tard dans la fonction, JavaScript se comporte comme si vous aviez écrit :
 
     (function () {
       var someName;
-      
+
       return someName;
-      
+
       someName = function someName () {
         // ...
       }
     })()
 
-What about a function declaration without `var`?
+Qu'en est-il d'une déclaration de fonction sans `var` ?
 
     (function () {
       return someName;
-      
+
       function someName () {
         // ...
       }
     })()
       //=> [Function: someName]
 
-Aha! It works differently, as if you'd written:
+Aha ! Cela fonctionne différemment, comme si vous aviez écrit :
 
     (function () {
       var someName = function someName () {
@@ -111,13 +111,13 @@ Aha! It works differently, as if you'd written:
       return someName;
     })()
 
-That difference is intentional on the part of JavaScript's design to facilitate a certain style of programming where you put the main logic up front, and the "helper functions" at the bottom. It is not necessary to declare functions in this way in JavaScript, but understanding the syntax and its behaviour (especially the way it differs from `var`) is essential for working with production code.
+Cette différence est intentionnelle de la part de la conception de JavaScript afin de faciliter un certain style de programmation dans lequel vous mettez la logique principale à l’avant et les "fonctions d’aide" en bas. Il n'est pas nécessaire de déclarer les fonctions de cette manière en JavaScript, mais il est essentiel de comprendre la syntaxe et son comportement (en particulier sa différence avec `var`) pour travailler avec le code de production.
 
 ### function declaration caveats[^caveats]
 
-Function declarations are formally only supposed to be made at what we might call the "top level" of a function. Although some JavaScript environments may permit it, this example is technically illegal and definitely a bad idea:
+Les déclarations de fonction ne sont formellement supposées être faites qu'à ce que nous pourrions appeler le "niveau supérieur" d'une fonction. Bien que certains environnements JavaScript le permettent, cet exemple est techniquement illégal et constitue une mauvaise idée:
 
-    // function declarations should not happen inside of 
+    // function declarations should not happen inside of
     // a block and/or be conditionally executed
     if (frobbishes.arePizzled()) {
       function complainToFactory () {
@@ -125,18 +125,18 @@ Function declarations are formally only supposed to be made at what we might cal
       }
     }
 
-The big trouble with expressions like this is that they may work just fine in your test environment but work a different way in production. Or it may work one way today and a different way when the JavaScript engine is updated, say with a new optimization.
+Le gros problème avec les expressions telles que celle-ci est qu'elles peuvent très bien fonctionner dans votre environnement de test mais fonctionner différemment en production. Ou bien, cela peut fonctionner aujourd'hui et d'une manière différente lorsque le moteur JavaScript est mis à jour, par exemple avec une nouvelle optimisation.
 
-Another caveat is that a function declaration cannot exist inside of *any* expression, otherwise it's a function expression. So this is a function declaration:
+Une autre mise en garde est qu'une déclaration de fonction ne peut pas exister à l'intérieur de *toute* expression, sinon c'est une expression de fonction. Donc, ceci est une déclaration de fonction:
 
     function trueDat () { return true }
 
-But this is not:
+Mais ce n'est pas :
 
     (function trueDat () { return true })
-    
-The parentheses make this an expression.
 
-[^lede]: A lead (or lede) paragraph in literature refers to the opening paragraph of an article, essay, news story or book chapter. In journalism, the failure to mention the most important, interesting or attention-grabbing elements of a story in the first paragraph is sometimes called "burying the lede."
+Les parenthèses en font une expression.
 
-[^caveats]: A number of the caveats discussed here were described in Jyrly Zaytsev's excellent article [Named function expressions demystified](http://kangax.github.com/nfe/).
+[^lede]: Un paragraphe de tête (ou lede) dans la littérature fait référence au paragraphe d'introduction d'un article, d'un essai, d'un reportage ou d'un chapitre de livre. En journalisme, le fait de ne pas mentionner les éléments les plus importants, les plus intéressants ou les plus captivants d'une histoire dans le premier paragraphe est parfois appelé "enterrer la vérité".
+
+[^caveats]: Un certain nombre des mises en garde évoquées ici ont été décrites dans l'excellent article de Jyrly Zaytsev [Named function expressions demystified](http://kangax.github.com/nfe/).
