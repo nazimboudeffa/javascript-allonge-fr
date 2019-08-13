@@ -1,26 +1,26 @@
-## Let's Talk Var {#let}
+## Parlons Var {#let}
 
-Up to now, all we've really seen are *anonymous functions*, functions that don't have a name. This feels very different from programming in most other languages, where the focus is on naming functions, methods, and procedures. Naming things is a critical part of programming, but all we've seen so far is how to name arguments.
+Jusqu'à présent, tout ce que nous avons vraiment vu sont des *fonctions anonymes*, des fonctions qui n'ont pas de nom. C’est là que l’accent est mis sur les fonctions, méthodes et procédures de dénomination. Nommer des éléments est un élément essentiel de la programmation, mais nous savons tous comment argumenter.
 
-There are other ways to name things in JavaScript, but before we learn some of those, let's see how to use what we already have to name things. Let's revisit a very simple example:
+Il existe d'autres moyens de nommer des éléments en JavaScript, mais avant d'en apprendre quelques-uns, voyons ce que nous faisons. Revenons sur un exemple très simple :
 
     function (diameter) {
       return diameter * 3.14159265
     }
 
-What is this "3.14159265" number? [Pi], obviously. We'd like to name it so that we can write something like:
+Quel est ce numéro "3.14159265" ? [Pi], évidemment. Nous aimerions le nommer pour pouvoir écrire quelque chose comme :
 
     function (diameter) {
       return diameter * Pi
     }
 
-In order to bind `3.14159265` to the name `Pi`, we'll need a function with a parameter of `Pi` applied to an argument of `3.14159265`. If we put our function expression in parentheses, we can apply it to the argument of `3.14159265`:
+Afin de binder `3.14159265` au nom de `Pi`, nous aurions besoin d'un paramètre de `Pi` appliqué à un argument de `3.14159265`. Si nous mettons notre expression de fonction entre parenthèses, nous pouvons l'appliquer à l'argument de `3.14159265` :
 
     (function (Pi) {
       return ????
     })(3.14159265)
 
-What do we put inside our new function that binds `3.14159265` to the name `Pi` when evaluated? Our circumference function, of course:
+Que mettons-nous dans notre nouvelle fonction qui lie `3.14159265` au nom `Pi` lors de l'évaluation ? Notre circonférence fonctionne, bien sûr :
 
 [Pi]: https://en.wikipedia.org/wiki/Pi
 
@@ -30,7 +30,7 @@ What do we put inside our new function that binds `3.14159265` to the name `Pi` 
       }
     })(3.14159265)
 
-This expression, when evaluated, returns a function that calculates circumferences. It differs from our original in that it names the constant `Pi`. Let's test it:
+Cette expression, une fois évaluée, renvoie une fonction calculant les circonférences. Il diffère de l'original en ce qu'il nomme la constante `Pi`. Testons le:
 
     (function (Pi) {
       return function (diameter) {
@@ -39,11 +39,11 @@ This expression, when evaluated, returns a function that calculates circumferenc
     })(3.14159265)(2)
       //=> 6.2831853
 
-That works! We can bind anything we want in an expression by wrapping it in a function that is immediately invoked with the value we want to bind.
+Ça marche ! Nous pouvons lier tout ce que nous voulons dans une expression en l'enveloppant dans une fonction qui est immédiatement appelée avec la valeur que nous voulons lier.
 
-### immediately invoked function expressions
+### a immédiatement appelé les expressions de fonction
 
-JavaScript programmers regularly use the idea of writing an expression that denotes a function and then immediately applying it to arguments. Explaining the pattern, Ben Alman coined the term [Immediately Invoked Function Expression][iife] for it, often abbreviated "IIFE." As we'll see in a moment, an IIFE need not have parameters:
+Les programmeurs JavaScript utilisent régulièrement l’idée d’écrire une expression qui dénote une fonction, puis l’applique immédiatement aux arguments. Expliquant le motif, Ben Alman a inventé le terme [Immediately Invoked Function Expression][iife], souvent abrégé en "IIFE". Comme nous le verrons dans un instant, un IIFE n'a pas besoin de paramètres:
 
     (function () {
       // ... do something here...
@@ -51,28 +51,32 @@ JavaScript programmers regularly use the idea of writing an expression that deno
 
 When an IIFE binds values to names (as we did above with `Pi`), retro-grouch programmers often call it "let."[^let] And confusing the issue, upcoming versions of JavaScript have support for a `let` keyword that has a similar binding behaviour.
 
+Quand un IIFE lie des valeurs à des noms (comme nous l’avons déjà fait avec `Pi`), les programmeurs de rétro-grouch l’appellent souvent "let" [^Let]. Et confondant le problème, les versions à venir de JavaScript ont un support pour un mot clé `let` qui a un comportement contraignant similaire.
+
 ### var {#var}
 
-Using an IIFE to bind names works very well, but only a masochist would write programs this way in JavaScript. Besides all the extra characters, it suffers from a fundamental semantic problem: there is a big visual distance between the name `Pi` and the value `3.14159265` we bind to it. They should be closer. Is there another way?
+Utiliser un IIFE pour lier des noms fonctionne, mais seul un masochiste écrit des programmes de cette manière en JavaScript. Outre tous les caractères supplémentaires, il souffre d'un problème sémantique fondamental: il existe une grande distance visuelle entre le `Pi` et la valeur `3.14159265` que nous lui lions. Ils devraient être plus proches. Y a-t-il un autre moyen?
 
-Yes.
+Oui.
 
-Another way to write our "circumference" function would be to pass `Pi` along with the diameter argument, something like this:
+Une autre façon d'écrire notre "circonférence" serait d'aller à `Pi` avec l'argument du diamètre, quelque chose comme ceci :
 
     function (diameter, Pi) {
       return diameter * Pi
     }
 
-And you could use it like this:
+Et vous pourriez l'utiliser comme ceci :
 
     (function (diameter, Pi) {
       return diameter * Pi
     })(2, 3.14159265)
       //=> 6.2831853
 
-This differs from our example above in that there is only one environment, rather than two. We have one binding in the environment representing our regular argument, and another our "constant." That's more efficient, and it's *almost* what we wanted all along: A way to bind `3.14159265` to a readable name.
+Cela diffère de notre exemple dans un environnement plutôt que dans deux. Nous avons un lien dans l'environnement de notre argumentation régulière, et un autre de notre "constante". C'est plus efficace, et c'est *presque* toujours le cas : un moyen de lier `3.14159265` à un nom lisible.
 
 JavaScript gives us a way to do that, the `var` keyword. We'll learn a lot more about `var` in future chapters, but here's the most important thing you can do with `var`:
+
+JavaScript nous donne un moyen de faire cela, le mot clé `var`. Nous en apprendrons plus sur `var` dans les chapitres à venir, mais voici la chose la plus importante que vous puissiez faire avec `var` :
 
     function (diameter) {
       var Pi = 3.14159265;
@@ -80,7 +84,7 @@ JavaScript gives us a way to do that, the `var` keyword. We'll learn a lot more 
       return diameter * Pi
     }
 
-The `var` keyword introduces one or more bindings in the current function's environment. It works just as we want:
+Le mot clé `var` introduit une ou plusieurs liaisons dans l'environnement de la fonction en cours. Cela fonctionne comme nous voulons :
 
     (function (diameter) {
       var Pi = 3.14159265;
@@ -89,7 +93,7 @@ The `var` keyword introduces one or more bindings in the current function's envi
     })(2)
       //=> 6.2831853
 
-You can bind any expression. Functions are expressions, so you can bind helper functions:
+Vous pouvez lier n'importe quelle expression. Les fonctions sont des expressions, vous pouvez donc lier des fonctions d'assistance :
 
     function (d) {
       var calc = function (diameter) {
@@ -103,11 +107,13 @@ You can bind any expression. Functions are expressions, so you can bind helper f
 
 Notice `calc(d)`? This underscores what we've said: if you have an expression that evaluates to a function, you apply it with `()`. A name that's bound to a function is a valid expression evaluating to a function.[^namedfn]
 
-[^namedfn]: We're into the second chapter and we've finally named a function. Sheesh.
+Avis `calc(d)` ? Cela souligne ce que nous avons dit: si vous avez une expression qui donne une fonction, vous l’appliquez avec `()`. Un nom lié à une fonction est une expression valide évaluation d'une fonction [^namedfn]
 
-A> Amazing how such an important idea--naming functions--can be explained *en passant* in just a few words. That emphasizes one of the things JavaScript gets really, really right: Functions as "first class entities." Functions are values that can be bound to names like any other value, passed as arguments, returned from other functions, and so forth.
+[^namedfn]: Nous en sommes au deuxième chapitre et nous avons finalement nommé une fonction. Sheesh.
 
-You can bind more than one name-value pair by separating them with commas. For readability, most people put one binding per line:
+A> C'est incroyable de voir comment une idée aussi importante - nommer des fonctions - peut être expliquée *en passant* en quelques mots. JavaScript est vraiment, vraiment correct: fonctionne comme "entités de première classe". Les fonctions sont des valeurs pouvant être liées à d'autres valeurs, transmises sous forme d'arguments, renvoyées par d'autres fonctions, etc.
+
+Vous pouvez lier plusieurs paires nom-valeur en les séparant par des virgules. Pour plus de lisibilité, la plupart des gens mettent une liaison par ligne :
 
     function (d) {
       var Pi   = 3.14159265,
@@ -118,7 +124,7 @@ You can bind more than one name-value pair by separating them with commas. For r
       return "The circumference is " + calc(d)
     }
 
-These examples use the `var` keyword to bind names in the same environment as our function. We can also create a new scope using an IIFE if we wish to bind some names in part of a function:
+Ces exemples utilisent le mot-clé `var` pour lier des noms dans le même environnement que notre fonction. Nous pouvons également créer une nouvelle portée à l'aide d'un IIFE si nous souhaitons lier certains noms dans une partie d'une fonction :
 
     function foobar () {
 
@@ -137,5 +143,7 @@ These examples use the `var` keyword to bind names in the same environment as ou
     }
 
 [^let]: To be pedantic, both main branches of Lisp today define a special construct called "let." One, Scheme, [uses `define-syntax` to rewrite `let` into an immediately invoked function expression that binds arguments to values](https://en.wikipedia.org/wiki/Scheme_(programming_language)#Minimalism) as shown above. The other, Common Lisp, leaves it up to implementations to decide how to implement `let`.
+
+[^let]: Pour être pédant, les deux branches principales de Lisp définissent aujourd'hui une construction spéciale appelée "let". L'un, Scheme, [uses `define-syntax` to rewrite `let` into an immediately invoked function expression that binds arguments to values](https://en.wikipedia.org/wiki/Scheme_(programming_language)#Minimalism) comme indiqué au dessus de. L'autre, Common Lisp, laisse le soin à l'implémentation de décider comment implémenter `let`.
 
 [iife]: http://www.benalman.com/news/2010/11/immediately-invoked-function-expression/
