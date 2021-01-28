@@ -1,38 +1,37 @@
-### a simple question
+### une simple question
 
-Consider this code:
+une question simple
+Considérez ce code :
 
-    var x = 'June 14, 1962',
-        y = x;
-        
-    x === y
-      //=> true
-
-This makes obvious sense, because we know that strings are a value type, so no matter what expression you use to derive the value 'June 14, 1962', you are going to get a string with the exact same identity.
-
-But what about this code?
-
-    var x = [2012, 6, 14],
-        y = x;
-        
-    x === y
-      //=> true
-
-Also true, even though we know that every time we evaluate an expression such as `[2012, 6, 14]`, we get a new array with a new identity. So what is happening in our environments?
-
-### arguments and references
-
-In our discussion of [closures](#closures), we said that environments bind values (like `[2012, 6, 14]`) to names (like `x` and `y`), and that when we use these names as expressions, the name evaluates as the value.
-
-What this means is that when we write something like `y = x`, the name `x` is looked up in the current environment, and its value is a specific array that was created when the expression `[2012, 6, 14]` was first evaluated. We then bind *that exact same value* to the name `y` in a new environment, and thus `x` and `y` are both bound to the exact same value, which is identical to itself.
-
-The same thing happens with binding a variable through a more conventional means of applying a function to arguments:
-
-    var x = [2012, 6, 14];
+var x = "June 14, 1962",
+    y = x ;
     
-    (function (y) {
-      return x === y
-    })(x)
-      //=> true
+x === y
+  //=> true
+C'est une évidence, car nous savons que les chaînes de caractères sont un type de valeur, donc quelle que soit l'expression utilisée pour obtenir la valeur "14 juin 1962", vous obtiendrez une chaîne de caractères ayant exactement la même identité.
 
-`x` and `y` both end up bound to the exact same array, not two different arrays that look the same to our eyes.
+Mais qu'en est-il de ce code ?
+
+var x = [2012, 6, 14],
+    y = x ;
+    
+x === y
+  //=> true
+C'est également vrai, même si nous savons que chaque fois que nous évaluons une expression telle que [2012, 6, 14], nous obtenons un nouvel éventail avec une nouvelle identité. Alors que se passe-t-il dans nos environnements ?
+
+arguments et références
+Dans notre discussion sur les fermetures, nous avons dit que les environnements lient des valeurs (comme [2012, 6, 14]) à des noms (comme x et y), et que lorsque nous utilisons ces noms comme des expressions, le nom est évalué comme la valeur.
+
+Cela signifie que lorsque nous écrivons quelque chose comme y = x, le nom x est recherché dans l'environnement actuel, et sa valeur est un tableau spécifique qui a été créé lorsque l'expression [2012, 6, 14] a été évaluée pour la première fois. Nous lions ensuite cette même valeur au nom y dans un nouvel environnement, et donc x et y sont tous deux liés à la même valeur, qui est identique à elle-même.
+
+La même chose se produit avec la liaison d'une variable par un moyen plus conventionnel d'appliquer une fonction à des arguments :
+
+var x = [2012, 6, 14] ;
+
+(fonction (y) [2012, 6, 14]) ; (fonction (y) [2012, 6, 14]).
+  return x === y
+})(x)
+  //=> true
+x et y sont tous deux liés à la même matrice, et non à deux matrices différentes qui se ressemblent à nos yeux.
+
+Traduit avec www.DeepL.com/Translator (version gratuite)
