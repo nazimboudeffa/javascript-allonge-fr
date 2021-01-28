@@ -1,48 +1,48 @@
-## References and Objects {#objects}
+## References et Objets {#objects}
 
-JavaScript also provides objects. The word "object" is loaded in programming circles, due to the widespread use of the term "object-oriented programming" that was coined by Alan Kay but has since come to mean many, many things to many different people.
+JavaScript fournit également des objets. Le mot "objet" est chargé dans les cercles de programmation, en raison de l'utilisation répandue du terme "programmation orientée objet" qui a été inventé par Alan Kay mais qui a depuis pris un sens très large pour de nombreuses personnes.
 
-In JavaScript, an object[^pojo] is a map from names to values, a lot like an environment. The most common syntax for creating an object is simple:
+En JavaScript, un objet [^pojo] est une carte qui va des noms aux valeurs, un peu comme un environnement. La syntaxe la plus courante pour créer un objet est simple :
 
-[^pojo]: Tradition would have us call objects that don't contain any functions "POJOs," meaning Plain Old JavaScript Objects.
+[^pojo] : La tradition voudrait que nous appelions les objets qui ne contiennent aucune fonction "POJOs", ce qui signifie Plain Old JavaScript Objects.
 
     { year: 2012, month: 6, day: 14 }
 
-Two objects created this way have differing identities, just like arrays:
+Deux objets créés de cette façon ont des identités différentes, tout comme les tableaux :
 
     { year: 2012, month: 6, day: 14 } === { year: 2012, month: 6, day: 14 }
       //=> false
 
-Objects use `[]` to access the values by name, using a string:
+Les objets utilisent `[]` pour accéder aux valeurs par leur nom, en utilisant une chaîne de caractères :
 
     { year: 2012, month: 6, day: 14 }['day']
       //=> 14
 
-Values contained within an object work just like values contained within an array:
+Les valeurs contenues dans un objet fonctionnent de la même manière que les valeurs contenues dans un tableau :
 
-    var unique = function () {
-                    return function () {}
+    var unique = fonction () {
+                    fonction de retour () {}
                   },
         x = unique(),
         y = unique(),
         z = unique(),
-        o = { a: x, b: y, c: z };
+        o = { a : x, b : y, c : z } ;
 
     o['a'] === x && o['b'] === y && o['c'] === z
       //=> true
 
-Names needn't be alphanumeric strings. For anything else, enclose the label in quotes:
+Les noms n'ont pas besoin d'être des chaînes alphanumériques. Pour toute autre chose, mettez l'étiquette entre guillemets :
 
     { 'first name': 'reginald', 'last name': 'lewis' }['first name']
       //=> 'reginald'
 
-If the name is an alphanumeric string conforming to the same rules as names of variables, there's a simplified syntax for accessing the values:
+Si le nom est une chaîne alphanumérique conforme aux mêmes règles que les noms de variables, il existe une syntaxe simplifiée pour accéder aux valeurs :
 
     { year: 2012, month: 6, day: 14 }['day'] ===
         { year: 2012, month: 6, day: 14 }.day
       //=> true
 
-All containers can contain any value, including functions or other containers:
+Tous les conteneurs peuvent contenir n'importe quelle valeur, y compris des fonctions ou d'autres conteneurs :
 
     var Mathematics = {
       abs: function (a) {
@@ -53,7 +53,7 @@ All containers can contain any value, including functions or other containers:
     Mathematics.abs(-5)
       //=> 5
 
-Funny we should mention `Mathematics`. If you recall, JavaScript provides a global environment that contains some existing objects that have handy functions you can use. One of them is called `Math`, and it contains functions for `abs`, `max`, `min`, and many others. Since it is always available, you can use it in any environment provided you don't shadow `Math`.
+C'est drôle qu'on parle de "mathématiques". Si vous vous souvenez bien, JavaScript fournit un environnement global qui contient quelques objets existants qui ont des fonctions pratiques que vous pouvez utiliser. L'un d'entre eux s'appelle "Math", et il contient des fonctions pour "abs", "max", "min", et bien d'autres. Comme il est toujours disponible, vous pouvez l'utiliser dans n'importe quel environnement à condition de ne pas faire d'ombre à `Math`.
 
     Math.abs(-5)
       //=> 5
