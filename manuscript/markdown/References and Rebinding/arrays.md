@@ -2,9 +2,9 @@
 
 JavaScript fournit deux types différents de conteneurs pour les valeurs. Nous en avons déjà rencontré un, le tableau. Voyons comment il traite les valeurs et les identités. Pour commencer, nous allons apprendre à extraire une valeur d'un tableau. Nous commencerons par une fonction qui crée une nouvelle valeur avec une identité unique à chaque fois que nous l'appelons. Nous savons déjà que chaque fonction que nous créons est unique, c'est donc ce que nous utiliserons :
 
-  var unique = fonction () {
-                  fonction de retour () {}
-                } ;
+    var unique = fonction () {
+                    fonction de retour () {}
+                  } ;
 
     unique()
       //=> [Fonction]
@@ -46,13 +46,13 @@ Testons-le :
     //=> true
 Si nous obtenons une valeur à partir d'un tableau en utilisant le suffixe [], c'est exactement la même valeur avec la même identité. Question : Cela s'applique-t-il aux autres emplacements du tableau ? Oui :
 
-  var unique = fonction () {
-                 fonction de retour () {}
-               },
-      x = unique(),
-      y = unique(),
-      z = unique(),
-      a = [ x, y, z ] ;
+    var unique = fonction () {
+                   fonction de retour () {}
+                 },
+        x = unique(),
+        y = unique(),
+        z = unique(),
+        a = [ x, y, z ] ;
 
-  a[0] === x && a[1] === y && a[2] === z
-    //=> true
+    a[0] === x && a[1] === y && a[2] === z
+      //=> true
