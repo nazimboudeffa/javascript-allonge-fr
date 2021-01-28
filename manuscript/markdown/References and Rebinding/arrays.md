@@ -1,63 +1,58 @@
-## Arguments and Arrays {#arrays}
+## Arguments et tableaux {#arrays}
 
-JavaScript provides two different kinds of containers for values. We've met one already, the array. Let's see how it treats values and identities. For starters, we'll learn how to extract a value from an array. We'll start with a function that makes a new value with a unique identity every time we call it. We already know that every function we create is unique, so that's what we'll use:
+JavaScript fournit deux types différents de conteneurs pour les valeurs. Nous en avons déjà rencontré un, le tableau. Voyons comment il traite les valeurs et les identités. Pour commencer, nous allons apprendre à extraire une valeur d'un tableau. Nous commencerons par une fonction qui crée une nouvelle valeur avec une identité unique à chaque fois que nous l'appelons. Nous savons déjà que chaque fonction que nous créons est unique, c'est donc ce que nous utiliserons :
 
-    var unique = function () {
-                    return function () {}
-                  };
+var unique = fonction () {
+                fonction de retour () {}
+              } ;
+
+  unique()
+    //=> [Fonction]
     
-      unique()
-        //=> [Function]
-        
-      unique() === unique()
-        //=> false
+  unique() === unique()
+    //=> false
+Vérifions que ce que nous avons dit à propos des références s'applique aussi bien aux fonctions qu'aux tableaux :
 
-Let's verify that what we said about references applies to functions as well as arrays:
-
-      var x = unique(),
-          y = x;
-          
-      x === y
-        //=> true
-
-Ok. So what about things *inside* arrays? We know how to create an array with something inside it:
-
-      [ unique() ]
-        //=> [ [Function] ]
-
-That's an array with one of our unique functions in it. How do we get something *out* of it?
-
-      var a = [ 'hello' ];
+  var x = unique(),
+      y = x ;
       
-      a[0]
-        //=> 'hello'
+  x === y
+    //=> true
+Ok. Alors, qu'en est-il des choses à l'intérieur des tableaux ? Nous savons comment créer un tableau avec quelque chose à l'intérieur :
 
-Cool, arrays work a lot like arrays in other languages and are zero-based. The trouble with this example is that strings are value types in JavaScript, so we have no idea whether `a[0]` always gives us the same value back like looking up a name in an environment, or whether it does some magic that tries to give us a new value.
+  [unique()]
+    //=> [ [Fonction] ]
+C'est un tableau qui contient l'une de nos fonctions uniques. Comment en tirer quelque chose ?
 
-We need to put a reference type into an array. If we get the same thing back, we know that the array stores a reference to whatever you put into it. If you get something different back, you know that arrays store copies of things.[^hunh]
+  var a = ['hello'] ;
+  
+  a[0]
+    //=> 'hello'
+Cool, les tableaux fonctionnent beaucoup comme les tableaux dans d'autres langues et sont basés sur le zéro. Le problème avec cet exemple est que les chaînes de caractères sont des types de valeur en JavaScript, donc nous n'avons aucune idée si un [0] nous redonne toujours la même valeur comme pour la recherche d'un nom dans un environnement, ou s'il fait un peu de magie qui essaie de nous donner une nouvelle valeur.
 
-[^hunh]: Arrays in all contemporary languages store references and not copies, so we can be forgiven for expecting them to work the same way in JavaScript. Nevertheless, it's a useful exercise to test things for ourself.
+Nous devons mettre un type de référence dans un tableau. Si nous obtenons la même chose en retour, nous savons que le tableau stocke une référence à ce que vous y mettez. Si vous obtenez quelque chose de différent en retour, vous savez que les tableaux stockent des copies de choses [^hunh].
 
-Let's test it:
+[^hunh] : Les tableaux dans toutes les langues contemporaines stockent des références et non des copies, on peut donc nous pardonner de nous attendre à ce qu'ils fonctionnent de la même manière en JavaScript. Néanmoins, c'est un exercice utile pour tester les choses par soi-même.
 
-    var unique = function () {
-                    return function () {}
-                  },
-        x = unique(),
-        a = [ x ];
-        
-    a[0] === x
-      //=> true
+Testons-le :
 
-If we get a value out of an array using the `[]` suffix, it's the exact same value with the same identity. Question: Does that apply to other locations in the array? Yes:
+var unique = fonction () {
+                fonction de retour () {}
+              },
+    x = unique(),
+    a = [ x ] ;
+    
+a [0] === x
+  //=> true
+Si nous obtenons une valeur à partir d'un tableau en utilisant le suffixe [], c'est exactement la même valeur avec la même identité. Question : Cela s'applique-t-il aux autres emplacements du tableau ? Oui :
 
-    var unique = function () {
-                   return function () {}
-                 },
-        x = unique(),
-        y = unique(),
-        z = unique(),
-        a = [ x, y, z ];
-        
-    a[0] === x && a[1] === y && a[2] === z
-      //=> true
+var unique = fonction () {
+               fonction de retour () {}
+             },
+    x = unique(),
+    y = unique(),
+    z = unique(),
+    a = [ x, y, z ] ;
+    
+a[0] === x && a[1] === y && a[2] === z
+  //=> true
