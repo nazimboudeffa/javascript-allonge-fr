@@ -33,5 +33,3 @@ La même chose se produit avec la liaison d'une variable par un moyen plus conve
 })(x)
   //=> true
 x et y sont tous deux liés à la même matrice, et non à deux matrices différentes qui se ressemblent à nos yeux.
-
-Traduit avec www.DeepL.com/Translator (version gratuite)
